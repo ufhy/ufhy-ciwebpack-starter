@@ -89,6 +89,5 @@ module.exports = {
   ],
   externals: {
     "vue": "Vue",
-    "pusher": "Pusher",
   }
 };
