@@ -1,12 +1,20 @@
-# CodeIgniter Composer Installer
+# Codeigniter starter kit
+this starter using modular system with HMVC
 
-[![Latest Stable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/stable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Total Downloads](https://poser.pugx.org/kenjis/codeigniter-composer-installer/downloads)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Latest Unstable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/unstable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![License](https://poser.pugx.org/kenjis/codeigniter-composer-installer/license)](https://packagist.org/packages/kenjis/codeigniter-composer-installer)
+## Helper added
+application_helper.php
+* indoDate($timestamp = '', $date_format = 'l, j F Y | H:i', $suffix = '')
+* terbilang($number, $suffix = 'rupiah')
+* dbPrefix($table)
+* bgExec($command)
 
-This package installs the offical [CodeIgniter](https://github.com/bcit-ci/CodeIgniter) (version `3.1.*`) with secure folder structure via Composer.
+bootstrap_helper.php
+* formInvalidFeedback($field)
+* formInvalid($field)
 
-**Note:** If you want to install CodeIgniter4 (under development), see <https://github.com/kenjis/codeigniter-composer-installer/tree/4.x>.
-
-You can update CodeIgniter system folder to latest version with one command.
+## Libraries added
+* Asset and Templating
+* Debuger bar
 
 ## Folder Structure
 
