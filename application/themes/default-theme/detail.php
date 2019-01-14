@@ -4,9 +4,10 @@ class Theme_Default_theme
 {
     public function init()
     {
-        ci()->template->append_metadata(
+        // this only example using google font
+        /*ci()->template->append_metadata(
             '<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">'
-        );
+        );*/
         if (ENVIRONMENT === 'development')
         {
             Asset::js('core::vue.js', true, 'vue');

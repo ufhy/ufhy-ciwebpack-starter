@@ -11,7 +11,13 @@
 </head>
 <body>
 
-<div id="root"></div>
+<div id="root">
+  <div class="bd-home">
+    <app-nav></app-nav>
+    <?php echo $template['body']; ?>
+    <app-footer></app-footer>
+  </div>
+</div>
 
 <?php echo file_partial('script-bottom'); ?>
 </body>
