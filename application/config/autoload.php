@@ -103,7 +103,7 @@ $autoload['helper'] = array();
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array('application');
+$autoload['config'] = array('application','language');
 
 /*
 | -------------------------------------------------------------------
@@ -117,7 +117,9 @@ $autoload['config'] = array('application');
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
-$autoload['language'] = array();
+$autoload['language'] = array(
+    'application'
+);
 
 /*
 | -------------------------------------------------------------------
