@@ -5,6 +5,10 @@ this is starter kit for codeigniter framework and using
 * [webpack 4](https://webpack.js.org)
 * [Vue](https://vuejs.org)
 
+## NPM Command
+* `npm run start` : before developing, make sure you have run the webpack dev server first
+* `npm run build` : ready to deploy. The deploy files will be stored in the `public/dist` folder
+
 ## Helper added
 application_helper.php
 * indoDate($timestamp = '', $date_format = 'l, j F Y | H:i', $suffix = '')
