@@ -23,7 +23,7 @@ bootstrap_helper.php
 
 ## Libraries added
 * Asset and Templating
-* Debuger bar
+* Debugger bar
 
 ## Folder Structure
 ```
