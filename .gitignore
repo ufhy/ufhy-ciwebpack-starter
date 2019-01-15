@@ -1,4 +1,5 @@
 .DS_Store
+.vscode
 
 application/cache/*
 !application/cache/index.html
@@ -16,6 +17,7 @@ user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
+/node_modules/
 
 # IDE Files
 #-------------------------
