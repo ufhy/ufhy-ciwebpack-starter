@@ -38,7 +38,9 @@ class Theme_Default_theme
         $scriptMeta = [
             sprintf('window.API_URL="%s";', site_url('api')),
             sprintf('window.SITE_URL="%s";', site_url()),
-            sprintf('window.BASE_URL="%s";', base_url())
+            sprintf('window.BASE_URL="%s";', base_url()),
+            sprintf('window.SITE_TITLE_FULL="%s";', ci()->template->siteNameFull),
+            sprintf('window.SITE_TITLE_ABBR="%s";', ci()->template->siteNameAbbr)
         ];
         ci()->template->append_metadata(
             sprintf(

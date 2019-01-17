@@ -1,22 +1,25 @@
-import Home from '../pages/home.vue';
-import DefaultLayout from '../layouts/default.vue';
+import Dashboard from '../pages/dashboard.vue';
+import Settings from '../pages/settings.vue';
 
 export default [
-  { path: '/', redirect: '/home' },
   {
-    path: '/home',
+    path: '/',
+    redirect: '/dashboard',
+  },
+  {
+    path: '/dashboard',
     meta: {
-      title: 'Home',
+      title: 'Dashboard',
     },
-    name: 'home',
-    component: DefaultLayout,
-    children: [{
-      path: '/',
-      meta: {
-        title: 'Home',
-      },
-      name: 'home.index',
-      component: Home,
-    }]
+    name: 'dashboard.index',
+    component: Dashboard,
+  },
+  {
+    path: '/settings',
+    meta: {
+      title: 'Settings',
+    },
+    name: 'settings.index',
+    component: Settings,
   },
 ];

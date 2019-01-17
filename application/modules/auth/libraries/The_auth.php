@@ -264,7 +264,7 @@ class The_auth
         }
 
         // original decrypt by starter
-        // $password = $salt ? $password . $salt : $password;
+        $password = $salt ? $password . $salt : $password;
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
@@ -282,7 +282,7 @@ class The_auth
             return false;
         }
 
-        // $password = $password . $passwordDb->salt;
+        $password = $password . $passwordDb->salt;
         return password_verify($password, $passwordDb->password);
     }
 
@@ -311,10 +311,9 @@ class The_auth
 
         $user = $this->_ci->{$this->_userModel}
             ->set_cache('current_user_'.$userId)
-            ->fields('id,ip_address,username,email,activation_code,forgotten_password_code,forgotten_password_time,remember_code,active,lang,group_id,branch_id,last_login')
+            ->fields('id,ip_address,username,email,activation_code,forgotten_password_code,forgotten_password_time,remember_code,active,lang,group_id,last_login')
             ->with('profile', [ 'fields:full_name,nik,position,phone,photo_file,updated_at'])
             ->with('group', ['fields:id,name,is_admin'])
-            ->with('branch', ['fields:id,name,is_head_office'])
             ->get(['id' => $userId]);
 
         $this->_ci->db->reset_query();
@@ -351,7 +350,7 @@ class The_auth
         return (bool) $user->group->is_admin;
     }
 
-	public function register($username, $password, $email, $branchId, $groupId = null, $profile = [], $lang = 'id', $active = FALSE)
+	public function register($username, $password, $email, $groupId = null, $profile = [], $lang = 'id', $active = FALSE)
     {
         if ($this->_loginIdentity === 'username' && $this->usernameCheck($username)) {
             $this->setError('auth::duplicate_username', true);
@@ -405,7 +404,6 @@ class The_auth
             'password' => $password,
             'lang' => $lang,
             'group_id' => $groupId,
-            'branch_id' => $branchId,
             'active' => $active
         ];
 
@@ -457,7 +455,6 @@ class The_auth
             'email'                 => $user->email,
             'user_id'               => $user->id,
             'old_last_login'        => $user->last_login,
-            'branch_id'             => $user->branch_id,
             'last_check'            => time()
         ];
         $this->_ci->session->set_userdata($sessionData);
@@ -587,7 +584,7 @@ class The_auth
         $userId = $this->_ci->session->userdata('user_id');
         $this->_ci->{$this->_userModel}->delete_cache('current_user_'.$userId);
 
-        $this->_ci->session->unset_userdata(['identity', $this->_loginIdentity, 'email', 'user_id', 'old_last_login', 'last_check', 'branch_id']);
+        $this->_ci->session->unset_userdata(['identity', $this->_loginIdentity, 'email', 'user_id', 'old_last_login', 'last_check']);
         if (get_cookie($this->_loginIdentityCookie)) {
             delete_cookie($this->_loginIdentityCookie);
         }

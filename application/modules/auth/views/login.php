@@ -1,16 +1,13 @@
-<div id="login-bg" class="d-flex flex-column position-fixed fixed-top fixed-bottom"></div>
+<div class="login-form row">
+  <div class="col-md-4 mt-3 offset-md-4">
 
-<div class="login-form row justify-content-md-center position-fixed fixed-top fixed-bottom">
-  <div class="col-md-4 mt-3">
-
-    <div class="card text-white mt-5">
+    <div class="card mt-5">
       <div class="card-body">
-        <div class="text-center mb-3 pt-3">
-          <img class="img-fluid" src="<?php echo base_url('assets/img/logo-app-small.png') ?>" style="width:65%">
-        </div>
-        <h5 class="card-title mb-4 mt-3 text-center" style="color:#c6ff1c;">
+        <h5 class="card-title mb-4 mt-3 text-center">
           <?php echo lang('auth::heading'); ?>
         </h5>
+
+        <p class="text-center"><?php echo lang('auth::description'); ?></p>
 
         <?php if (!empty($error_msg)) { ?>
         <div class="alert alert-danger">
@@ -22,8 +19,6 @@
                 <?php echo $success_msg; ?>
             </div>
           <?php } ?>
-
-        <p class="text-center"><?php echo lang('auth::description'); ?></p>
 
         <?php echo form_open(); ?>
         <div class="form-group">
@@ -59,7 +54,7 @@
         </div>
 
         <div class="form-group">
-          <button class="btn btn-login btn-block"><?php echo lang('auth::login_btn'); ?></button>
+          <button class="btn btn-login btn-primary btn-block"><?php echo lang('auth::login_btn'); ?></button>
         </div>
         <?php echo form_close(); ?>
       </div>

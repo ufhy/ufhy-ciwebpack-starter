@@ -7,12 +7,13 @@
  */
 class Auth extends Public_Controller
 {
-    public $_themeName = 'auth-theme';
+    // public $_themeName = 'auth-theme';
 
     public function __construct()
     {
         parent::__construct();
 
+        $this->template->set_layout('auth');
         $this->lang->load('auth/auth');
         $this->template->title('Auth');
     }
@@ -57,25 +58,5 @@ class Auth extends Public_Controller
         $this->session->set_flashdata('message.success', $this->the_auth->getMessageStr());
 
         redirect('auth');
-    }
-
-    public function test()
-    {
-        $this->output->enable_profiler(false);
-
-        $row = 1;
-        if (($handle = fopen(__DIR__. "/../../../../resource/ms-icon/list-icon.csv", "r")) !== FALSE)
-        {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                $row++;
-                $html = '<div class="col">';
-                $html .= sprintf('<i class="ms-Icon ms-Icon--%s"></i>', $data[0]);
-                $html .= '</div>';
-                echo $html;
-            }
-
-            fclose($handle);
-        }
     }
 }

@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
   next();
 });
 router.afterEach((to, from) => {
-	document.title = to.meta.title + ' - CI Starter Kit';
+	document.title = to.meta.title + ' - ' + SITE_TITLE_FULL;
 });
 
 export default router;

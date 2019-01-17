@@ -1,5 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+$config['auth_redirect_key'] = 'login::redirect';
+
 /**
  * Template Configuration
  */

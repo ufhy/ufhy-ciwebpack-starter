@@ -14,6 +14,10 @@
  * @property MY_Lang $lang
  * @property MX_Config $config
  * @property MY_Form_validation $form_validation
+ * @property The_auth $the_auth
+ * @property The_file $the_file
+ * @property Group_permission_model $group_permission_model
+ * @property Module_model $module_model
  */
 class MY_Controller extends MX_Controller
 {
@@ -29,7 +33,7 @@ class MY_Controller extends MX_Controller
         parent::__construct();
 
         $this->load->library(['session','asset','template','settings/setting','auth/the_auth']);
-        $this->load->helper(['language','url','form','html','application']);
+        $this->load->helper(['language','url','form','html','application','bootstrap']);
         $this->load->model(['addons/module_model','users/group_permission_model']);
 
         // set template theme
@@ -57,6 +61,8 @@ class MY_Controller extends MX_Controller
             : [];
         ci()->enabledModules = $this->module_model->getAll(['status' => 'A', 'order' => true]);
 
+        $ufhy['site_name_full'] = $this->template->siteNameFull = Setting::get('site_name_full');
+        $ufhy['site_name_abbr'] = $this->template->siteNameAbbr = Setting::get('site_name_abbr');
         $this->_loadThemeConfiguration();
 
         $this->load->library('events');
@@ -73,8 +79,6 @@ class MY_Controller extends MX_Controller
 
         $ufhy['module_details'] = $this->_moduleDetails;
         $ufhy['current_user'] = $this->_currentUser;
-        $ufhy['site_name_full'] = Setting::get('site_name_full');
-        $ufhy['site_name_abbr'] = Setting::get('site_name_abbr');
 
         // set public vars for views
         $this->load->vars($ufhy);

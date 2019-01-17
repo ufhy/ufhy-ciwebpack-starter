@@ -18,6 +18,28 @@ class Module_model extends MY_Model
         parent::__construct();
     }
 
+    /**
+     * Exists
+     *
+     * Checks if a module exists
+     *
+     * @param	string	$slug	The module slug
+     * @return	bool
+     */
+    public function exists($slug)
+    {
+        if (!$slug) {
+            return false;
+        }
+
+        if (isset($this->_moduleExists[$slug]))
+        {
+            return $this->_moduleExists[$slug];
+        }
+
+        return $this->count_rows(['slug' => $slug, 'status' => 'A']) > 0;
+    }
+
     private function _spawnClass($slug)
     {
         $details_file = APPPATH.'modules/'.$slug.'/details'.EXT;

@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['auth::heading'] = 'PT. Bumi Lintas Tama';
-$lang['auth::description'] = 'Masuk untuk dapat menggunakan aplikasi velos';
+$lang['auth::heading'] = 'Codeigniter webpack starter';
+$lang['auth::description'] = 'Sign in for using control panel';
 $lang['auth::identity'] = 'Username';
 $lang['auth::password'] = 'Password';
-$lang['auth::remember_me'] = 'Ingat saya';
-$lang['auth::forgot_password'] = 'Lupa password';
-$lang['auth::login_btn'] = 'Login';
+$lang['auth::remember_me'] = 'Remember me';
+$lang['auth::forgot_password'] = 'Forgot password';
+$lang['auth::login_btn'] = 'Sign in';
 
 $lang['auth::login_username_password_empty'] = "Username and password is required";
 $lang['auth::login_email_password_empty'] = "Email and password is required";

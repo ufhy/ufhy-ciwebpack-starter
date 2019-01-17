@@ -1,2 +1,2 @@
 <meta charset="UTF-8">
-<title>CI Starter Kit</title>
+<title><?php echo $site_name_full; ?></title>

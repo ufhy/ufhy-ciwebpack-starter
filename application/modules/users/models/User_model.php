@@ -11,7 +11,7 @@ class User_model extends MY_Model
     public $table = 'user_users';
     public $primary_key = 'id';
     public $fillable = [
-        'ip_address','username','password','salt','email','activation_code','forgotten_password_code','branch_id',
+        'ip_address','username','password','salt','email','activation_code','forgotten_password_code',
         'forgotten_password_time','remember_code','active','lang','group_id','last_login'
     ];
 
@@ -19,7 +19,6 @@ class User_model extends MY_Model
     {
         $this->has_one['profile'] = ['users/Profile_model', 'user_id', 'id'];
         $this->has_one['group'] = ['users/Group_model', 'id', 'group_id'];
-        $this->has_one['branch'] = ['reference/Branch_office_model', 'id', 'branch_id'];
 
         parent::__construct();
     }
