@@ -11,6 +11,10 @@ application/logs/*
 
 !application/*/.htaccess
 
+public/dist/*
+!public/dist/index.html
+
+
 composer.lock
 package-lock.json
 

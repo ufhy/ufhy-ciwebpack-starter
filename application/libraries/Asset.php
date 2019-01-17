@@ -1115,21 +1115,21 @@ class Asset {
 		}
 
         $path = self::$asset_paths[$parts[0]]['path'];
-		if (ENVIRONMENT === 'production') {
+		if (ENVIRONMENT === 'production' OR ENVIRONMENT === 'testing') {
             if ($parts[0] === 'webpack') {
                 $manifest = file_get_contents(FCPATH . 'dist/manifest.json');
                 $manifestArr = json_decode($manifest);
-            }
+			}
 
             if ($parts[0] === 'webpack') {
-                $parts[1] = ltrim($parts[1], 'dist/');
-                $file = is_array($manifestArr) ? $manifestArr[$parts[1]] : $manifestArr->{$parts[1]};
+				$parts[1] = ltrim($parts[1], 'dist/');
+				$file = is_array($manifestArr) ? $manifestArr[$parts[1]] : $manifestArr->{$parts[1]};
             } else {
                 $file = $parts[1];
             }
         } else {
             $file = $parts[1];
-        }
+		}
 
 		$folder = self::$asset_paths[$parts[0]]['dirs'][$asset_type];
 		$file = ltrim($file, '/');

@@ -48,7 +48,7 @@ class Theme_Default_theme
             )
         );
 
-        Asset::js('webpack::dist/default-theme.js', true, 'webpack-bundle');
-        Asset::css('webpack::dist/default-theme.css', true, 'webpack-bundle');
+        Asset::js('webpack::dist/main.js', true, 'webpack-bundle');
+        Asset::css('webpack::dist/main.css', true, 'webpack-bundle');
     }
 }
