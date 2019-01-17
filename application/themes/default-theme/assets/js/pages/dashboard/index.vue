@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-6 mx-auto col-md-6 order-md-2">
           <img
-            :src="require('../../img/icon.png')"
+            :src="require('../../../img/icon.png')"
             alt="Logo"
             class="img-fluid mx-auto d-block mb-3 mb-md-0"
           >
