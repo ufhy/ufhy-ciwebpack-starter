@@ -1,0 +1,21 @@
+@import "./variables";
+
+.toasted {
+  &.ufhy {
+    border-radius: 2px;
+    min-height: 38px;
+    line-height: 1.1em;
+    background-color: #353535;
+    padding: 0 20px;
+    font-weight: 300;
+    color: #fff;
+    &.error {
+      background-color: $danger;
+      color: $white;
+    }
+    &.success {
+      background-color: $success;
+      color: $white;
+    }
+  }
+}
