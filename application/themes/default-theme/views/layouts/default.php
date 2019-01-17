@@ -13,7 +13,7 @@
 
 <div id="root">
   <b-navbar toggleable="md" type="light" variant="light" class="mb-3">
-    <b-navbar-brand href="#">
+    <b-navbar-brand href="<?php echo site_url() ?>">
       <?php echo $site_name_abbr; ?>
     </b-navbar-brand>
 
