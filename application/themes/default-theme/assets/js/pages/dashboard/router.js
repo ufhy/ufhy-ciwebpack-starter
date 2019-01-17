@@ -1,4 +1,4 @@
-import Index from './index.vue';
+const Index = () => import('./index.vue');
 
 export default {
 	path: '/dashboard',
