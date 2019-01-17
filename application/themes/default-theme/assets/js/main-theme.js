@@ -5,11 +5,11 @@ if (ENV === 'production') {
 
 
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
 import router from './router';
 import '../scss/default-theme.scss';
 
-Vue.use(BootstrapVue);
+// import BootstrapVue from 'bootstrap-vue';
+// Vue.use(BootstrapVue);
 
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {

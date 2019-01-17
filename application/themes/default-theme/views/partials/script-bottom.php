@@ -1,6 +1,7 @@
 <?php
 
 echo Asset::render_js('vue');
+echo Asset::render_js('bootstrap-vue');
 
 if (ENVIRONMENT === 'development') {
     echo Asset::render_js('webpack-dev-server');
