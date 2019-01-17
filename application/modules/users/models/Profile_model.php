@@ -5,7 +5,7 @@ class Profile_model extends MY_Model
     public $table = 'user_profile';
     public $primary_key = 'user_id';
     public $fillable = [
-        'user_id','full_name','phone','photo_file','nik','position'
+        'user_id','full_name','phone','photo_file'
     ];
 
     public function __construct()

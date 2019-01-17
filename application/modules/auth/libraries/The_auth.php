@@ -312,7 +312,7 @@ class The_auth
         $user = $this->_ci->{$this->_userModel}
             ->set_cache('current_user_'.$userId)
             ->fields('id,ip_address,username,email,activation_code,forgotten_password_code,forgotten_password_time,remember_code,active,lang,group_id,last_login')
-            ->with('profile', [ 'fields:full_name,nik,position,phone,photo_file,updated_at'])
+            ->with('profile', [ 'fields:full_name,phone,photo_file,updated_at'])
             ->with('group', ['fields:id,name,is_admin'])
             ->get(['id' => $userId]);
 
