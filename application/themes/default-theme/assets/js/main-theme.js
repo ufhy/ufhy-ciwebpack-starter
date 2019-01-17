@@ -8,9 +8,6 @@ import Vue from 'vue';
 import router from './router';
 import '../scss/default-theme.scss';
 
-// import BootstrapVue from 'bootstrap-vue';
-// Vue.use(BootstrapVue);
-
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {
   position: 'top-center',
