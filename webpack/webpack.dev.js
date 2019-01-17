@@ -40,6 +40,7 @@ const config = merge(common, {
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
+    disableHostCheck: true,
     port: 9000,
     headers: { "Access-Control-Allow-Origin": "*" },
   },
