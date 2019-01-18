@@ -9,7 +9,7 @@ export default {
 	path: '/users',
 	redirect: '/dashboard',
 	meta: {
-		breadcrumbText: 'Users'
+		title: 'Users'
 	},
 	component: Component,
 	children: [

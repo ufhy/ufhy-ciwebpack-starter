@@ -1,7 +1,8 @@
 <template>
   <div class="container">
+    <app-page-header title="Groups" breadcrumb></app-page-header>
     <vuetable ref="vuetable"
-      :fields="['name', 'nickname', 'email', 'gender']"
+      :fields="tableOptions.fields"
       :api-mode="false"
       :data="localData"
     ></vuetable>
@@ -10,13 +11,17 @@
 
 <script>
 const Vuetable = () => import('vuetable-2');
+const AppPageHeader = () => import('../../../components/AppPageHeader.vue');
 export default {
   name: 'users-group-page',
   components: {
-    Vuetable
+    Vuetable, AppPageHeader
   },
   data() {
     return {
+      tableOptions: {
+        fields: ['Name', 'Description', 'Default', 'Admin', 'Updated At']
+      },
       localData: []
     }
   }

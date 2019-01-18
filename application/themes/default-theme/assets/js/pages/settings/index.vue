@@ -1,15 +1,19 @@
 <template>
   <div class="container">
-    <b-card header="Settings">
-    </b-card>
+    <app-page-header title="Settings" breadcrumbs></app-page-header>
+    
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'settings-page',
-    created() {
-      this.$axios.get('settings');
-    }
+const AppPageHeader = () => import('../../components/AppPageHeader.vue');
+export default {
+  name: 'settings-page',
+  components: {
+    AppPageHeader
+  },
+  created() {
+    this.$axios.get('settings');
   }
+}
 </script>
