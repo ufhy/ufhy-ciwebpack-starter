@@ -27,5 +27,8 @@ Vue.prototype.$axios = api();
 window.VUE = new Vue({
   el: "#root",
   router,
-  store
+  store,
+  created() {
+    this.$store.dispatch('localisation/getI18n');
+  }
 });
