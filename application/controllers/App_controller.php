@@ -5,6 +5,6 @@ class App_controller extends Backend_Controller {
 
 	public function index()
 	{
-        $this->template->build('app_view');
+        $this->template->build('pages/body');
 	}
 }

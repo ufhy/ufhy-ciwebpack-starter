@@ -21,7 +21,7 @@ export default () => {
       });
       VUE.$toasted.error('Please refresh your browser!');
     } else if (status === 403) {
-      window.location.href = SITE_URL + 'auth/logout';
+      window.location.href = SITE_URL + '/auth/logout';
     }
 
     return Promise.reject(error.response);

@@ -1,0 +1,28 @@
+.uf-datatable {
+	.v-table {
+		th {
+			font-size: 10.5px;
+			letter-spacing: .06em;
+			font-weight: bold;
+			text-transform: uppercase
+		}
+		thead tr {
+			height: auto;
+			th {
+				padding-bottom: 8px;
+				padding-top: 16px;
+			}
+
+			&:first-child {
+				border-bottom: 2px solid #2b303b;
+			}
+		}
+
+		tbody tr[active] {
+			background: #FFFDE7;
+		}
+		tbody tr:hover:not(.v-datatable__expand-row) {
+			background: #FFF9C4;
+		}
+	}
+}

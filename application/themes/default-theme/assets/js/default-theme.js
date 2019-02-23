@@ -6,16 +6,19 @@ if (ENV === 'production') {
 import Vue from 'vue';
 import router from './router';
 import store from './store';
+import Uftify from './layouts/Uftify.vue'
 import '../scss/default-theme.scss';
 
 import api from './utils/api';
+import _ from 'lodash';
 Vue.prototype.$axios = api();
+Vue.prototype.$lodash = _;
 
 window.VUE = new Vue({
-  el: "#root",
   router,
   store,
   created() {
     this.$store.dispatch('localisation/getI18n');
-  }
-});
+  },
+  render: h => h(Uftify)
+}).$mount('#root');

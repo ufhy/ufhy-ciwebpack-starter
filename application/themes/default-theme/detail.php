@@ -11,7 +11,6 @@ class Theme_Default_theme
         if (ENVIRONMENT === 'development')
         {
             Asset::js('core::vue.js', true, 'vue');
-            Asset::js('core::bootstrap-vue.js', true, 'bootstrap-vue');
 
             Asset::add_path('webpack', [
                 'path' => 'http://localhost:9000',
@@ -34,8 +33,11 @@ class Theme_Default_theme
             ]);
 
             Asset::js('core::vue.min.js', true, 'vue');
-            Asset::js('core::bootstrap-vue.min.js', true, 'bootstrap-vue');
         }
+
+        Asset::js('webpack::dist/vuetify.js', true, 'webpack-vendors');
+        Asset::css('webpack::dist/vuetify.css', true, 'webpack-vendors');
+        Asset::css('webpack::dist/line-awesome.css', true, 'webpack-vendors');
 
         $scriptMeta = [
             sprintf('window.API_URL="%s";', site_url('api')),
@@ -50,7 +52,7 @@ class Theme_Default_theme
             )
         );
 
-        // Asset::js('webpack::dist/main-theme.js', true, 'webpack-bundle');
-        // Asset::css('webpack::dist/main-theme.css', true, 'webpack-bundle');
+        Asset::js('webpack::dist/default-theme.js', true, 'webpack-bundle');
+        Asset::css('webpack::dist/default-theme.css', true, 'webpack-bundle');
     }
 }

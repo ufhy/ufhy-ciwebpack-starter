@@ -1,0 +1,13 @@
+.uf-toolbar {
+	.v-toolbar__content {
+		border-bottom: 1px solid rgba(230,230,230,.7);
+	}
+}
+
+.uf-toolbar__search-input {
+	&.v-text-field.v-text-field--solo {
+		.v-input__control {
+			min-height: $uf-toolbar-height - 20px;
+		}
+	}
+}
