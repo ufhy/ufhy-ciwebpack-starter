@@ -5,33 +5,12 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = require('./webpack.common');
-const splitString = require('./helpers/splitString');
-
-const appPath = path.join(__dirname, '../application');
-const pathEntries = [
-  path.resolve(appPath,'themes/**/assets/js/*.js')
-];
-
-const entryFiles = {
-  'webpack-dev-server': 'webpack-dev-server/client?http://localhost:9000',
-  'only-dev-server': 'webpack/hot/only-dev-server',
-  'profiler': path.resolve(appPath, 'views/profiler/profiler.js'),
-};
-
-pathEntries.forEach((path) => {
-  const globpaths = glob.sync(path);
-  const parentdir  = 'js';
-  const ext  = 'js';
-  globpaths.forEach((path) => {
-    const key = splitString(path, `/${parentdir}/`).slice(-1)[0].replace(`.${ext}`, '');
-    entryFiles[key] = path;
-  });
-});
+const entryFiles = require('./helpers/entryFiles');
 
 const config = merge(common, {
   mode: 'development',
   devtool: "cheap-module-eval-source-map",
-  entry: entryFiles,
+  entry: entryFiles(true),
   output: {
     filename: '[name].js',
     chunkFilename: '[name].[hash].js',

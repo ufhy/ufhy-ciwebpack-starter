@@ -16,15 +16,30 @@ module.exports = {
         loader: 'vue-loader',
       },
       {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-syntax-dynamic-import','@babel/plugin-transform-runtime']
+          }
+        }
+      },
+      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true },
+          },
+        ]
       },
       {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          //"css-loader", // translates CSS into CommonJS
-          //"sass-loader" // compiles Sass to CSS"
           {
             loader: 'css-loader',
             options: {sourceMap: true},
@@ -32,6 +47,20 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {sourceMap: true},
+          },
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true },
+          },
+          {
+            loader: 'stylus-loader',
+            options: { sourceMap: true },
           },
         ]
       },
@@ -88,6 +117,6 @@ module.exports = {
     new VueLoaderPlugin(),
   ],
   externals: {
-    "vue": "Vue",
+    "vue": "Vue"
   }
 };

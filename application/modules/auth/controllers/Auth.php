@@ -7,7 +7,7 @@
  */
 class Auth extends Public_Controller
 {
-    // public $_themeName = 'auth-theme';
+    public $_themeName = 'auth-theme';
 
     public function __construct()
     {
@@ -49,7 +49,7 @@ class Auth extends Public_Controller
             ->pageTitle('Login')
             ->set('error_msg', $this->session->flashdata('message.error'))
             ->set('success_msg', $this->session->flashdata('message.success'))
-            ->build('auth/login');
+            ->build('pages/login');
     }
 
     public function logout()

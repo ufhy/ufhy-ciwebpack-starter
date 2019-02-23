@@ -11,9 +11,11 @@
 <body>
 
 <div id="root">
-    <?php echo $template['body']; ?>
+    <v-app>
+        <?php echo $template['body']; ?>
+    </v-app>
 </div>
 
-<?php // echo file_partial('script-bottom'); ?>
+<?php echo file_partial('script-bottom'); ?>
 </body>
 </html>

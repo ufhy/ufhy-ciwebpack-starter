@@ -8,19 +8,6 @@ import router from './router';
 import store from './store';
 import '../scss/default-theme.scss';
 
-import Toasted from 'vue-toasted';
-Vue.use(Toasted, {
-  position: 'top-center',
-  duration: 5000,
-  theme: 'ufhy',
-  action: {
-    text: 'Close',
-    onClick: (e, toastObject) => {
-      toastObject.goAway(0);
-    }
-  },
-});
-
 import api from './utils/api';
 Vue.prototype.$axios = api();
 
