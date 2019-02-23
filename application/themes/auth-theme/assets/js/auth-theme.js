@@ -9,9 +9,6 @@ import Vue from 'vue';
 import store from './store';
 import '../scss/auth-theme.scss';
 
-import api from './utils/api';
-Vue.prototype.$axios = api();
-
 window.VUE = new Vue({
   el: "#root",
   store,
