@@ -12,6 +12,11 @@
 <body>
 
 <div id="root">
+  <v-app>
+    <v-content>
+      <?php echo $template['body']; ?>
+    </v-content>
+  </v-app>
   <b-navbar toggleable="md" type="light" variant="light" class="mb-3">
     <b-navbar-brand href="<?php echo site_url() ?>">
       <?php echo $site_name_abbr; ?>
