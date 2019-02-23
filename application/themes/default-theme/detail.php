@@ -23,6 +23,7 @@ class Theme_Default_theme
             Asset::js('webpack::dist/only-dev-server.js', true, 'webpack-dev-server');
             Asset::js('webpack::dist/webpack-dev-server.js', true, 'webpack-server');
             Asset::js('webpack::dist/profiler.js', true, 'webpack-profiler');
+            Asset::css('webpack::dist/profiler.css', true, 'webpack-profiler');
         }
         else {
             Asset::add_path('webpack', [
@@ -40,11 +41,11 @@ class Theme_Default_theme
         Asset::css('webpack::dist/line-awesome.css', true, 'webpack-vendors');
 
         $scriptMeta = [
-            sprintf('window.API_URL="%s";', site_url('api')),
-            sprintf('window.SITE_URL="%s";', site_url()),
-            sprintf('window.BASE_URL="%s";', base_url()),
-            sprintf('window.SITE_TITLE_FULL="%s";', ci()->template->siteNameFull),
-            sprintf('window.SITE_TITLE_ABBR="%s";', ci()->template->siteNameAbbr)
+            sprintf('ufhy.API_URL="%s";', site_url('api')),
+            sprintf('ufhy.SITE_URL="%s";', site_url()),
+            sprintf('ufhy.BASE_URL="%s";', base_url()),
+            sprintf('ufhy.SITE_TITLE_FULL="%s";', ci()->template->siteNameFull),
+            sprintf('ufhy.SITE_TITLE_ABBR="%s";', ci()->template->siteNameAbbr)
         ];
         ci()->template->append_metadata(
             sprintf(

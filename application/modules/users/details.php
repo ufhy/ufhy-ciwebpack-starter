@@ -10,7 +10,7 @@ class Module_Users {
             'name' => array(
                 'en' => 'Users',
             ),
-            'icon' => 'ms-Icon ms-Icon--people2',
+            'icon' => 'la la-group',
             'menu' => 'users',
             'menu_group' => 'navigation',
             'sections' => array(

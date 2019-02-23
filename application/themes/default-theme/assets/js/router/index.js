@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
   next();
 });
 router.afterEach((to, from) => {
-  document.title = to.meta.title + ' - ' + SITE_TITLE_FULL;
+  document.title = to.meta.title + ' - ' + ufhy.SITE_TITLE_FULL;
   NProgress.done();
 });
 

@@ -17,6 +17,14 @@ class Backend_Controller extends MY_Controller
         $ufhy['isAdmin'] = $this->the_auth->isUserAdmin();
         $this->load->vars($ufhy);
 
+        // set default language already loaded
+        ci()->template->append_metadata(
+            sprintf(
+                '<script>ufhy.LANGS = %s</script>',
+                json_encode($this->lang->language)
+            )
+        );
+
         $this->template->active_section = $this->_section;
         $this->_buildNavigation();
     }
@@ -96,5 +104,11 @@ class Backend_Controller extends MY_Controller
         }
 
         $this->template->menu_items = $orderedMenu;
+        ci()->template->append_metadata(
+            sprintf(
+                '<script>ufhy.MENU_ITEMS = %s;</script>',
+                json_encode($orderedMenu)
+            )
+        );
     }
 }

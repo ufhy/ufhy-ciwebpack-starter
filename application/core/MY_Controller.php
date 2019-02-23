@@ -63,6 +63,17 @@ class MY_Controller extends MX_Controller
 
         $ufhy['site_name_full'] = $this->template->siteNameFull = Setting::get('site_name_full');
         $ufhy['site_name_abbr'] = $this->template->siteNameAbbr = Setting::get('site_name_abbr');
+        
+        // set global variable for javascript
+        ci()->template->append_metadata(
+            '<script>if (typeof(ufhy) === "undefined") { var ufhy = {}; }</script>'
+        );
+        ci()->template->append_metadata(
+            sprintf(
+                '<script>ufhy.LANG = "%s"</script>',
+                CURRENT_LANGUAGE
+            )
+        );
         $this->_loadThemeConfiguration();
 
         $this->load->library('events');

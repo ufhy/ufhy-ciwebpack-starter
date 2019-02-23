@@ -18,7 +18,7 @@
 		
 		<template v-if="miniVariant">
 			<div class="uf-drawer__mini-content pt-3">
-				<template v-for="(item, index) in items">
+				<template v-for="(item, index) in menuItems">
 					<template v-if="item.childrens">
 						<v-menu offset-x full-width
 							:key="index" 
@@ -30,13 +30,13 @@
 								<v-icon>{{item.icon}}</v-icon>
 							</v-btn>
 							<v-list dense>
-								<v-subheader class="blue-grey--text text--darken-4">{{item.text}}</v-subheader>
+								<v-subheader class="blue-grey--text text--darken-4">{{ $t(item.text) }}</v-subheader>
 								<v-list-tile
 									v-for="(children, indexChild) in item.childrens"
 									:key="index + indexChild"
-									:to="{name: children.urlName}">
+									:to="children.url">
 									<v-list-tile-content class="pl-3">
-										<v-list-tile-title>{{ children.text }}</v-list-tile-title>
+										<v-list-tile-title>{{ $t(children.text) }}</v-list-tile-title>
 									</v-list-tile-content>
 								</v-list-tile>
 							</v-list>
@@ -47,11 +47,11 @@
 						<v-tooltip right :key="index">
 							<v-btn flat 
 								slot="activator" 
-								:to="{name: item.urlName}"
+								:to="item.url"
 								active-class="blue lighten-5 blue--text text--darken-4">
-								<v-icon>{{item.icon}}</v-icon>
+								<v-icon>{{ item.icon }}</v-icon>
 							</v-btn>
-							<span>{{item.text}}</span>
+							<span>{{ $t(item.text) }}</span>
 						</v-tooltip>
 					</template>
 				</template>
@@ -60,7 +60,7 @@
 
 		<template v-else>
 			<v-list dense expand class="scroll-y pt-2">
-				<template v-for="(item, index) in items">
+				<template v-for="(item, index) in menuItems">
 					<template v-if="item.childrens">
 						<v-list-group 
 							:key="index"
@@ -72,7 +72,7 @@
 									<v-icon>{{item.icon}}</v-icon>
 								</v-list-tile-avatar>
 								<v-list-tile-content>
-									<v-list-tile-title>{{ item.text }}</v-list-tile-title>
+									<v-list-tile-title>{{ $t(item.text) }}</v-list-tile-title>
 								</v-list-tile-content>
 							</v-list-tile>
 
@@ -80,12 +80,12 @@
 								<v-list-tile 
 									active-class="uf-drawer__list-tile__active"
 									:key="index + indexChild" 
-									:to="{name: children.urlName}">
+									:to="children.url">
 								<v-list-tile-avatar>
 									<v-icon>{{children.icon}}</v-icon>
 								</v-list-tile-avatar>
 									<v-list-tile-content>
-										<v-list-tile-title>{{ children.text }}</v-list-tile-title>
+										<v-list-tile-title>{{ $t(children.text) }}</v-list-tile-title>
 									</v-list-tile-content>
 								</v-list-tile>
 							</template>
@@ -95,13 +95,13 @@
 					<template v-else>
 						<v-list-tile 
 							:key="index" 
-							:to="{name: item.urlName}"
+							:to="item.url"
 							active-class="uf-drawer__list-tile__active">
 							<v-list-tile-avatar>
 								<v-icon>{{item.icon}}</v-icon>
 							</v-list-tile-avatar>
 							<v-list-tile-content>
-								<v-list-tile-title>{{ item.text }}</v-list-tile-title>
+								<v-list-tile-title>{{ $t(item.text) }}</v-list-tile-title>
 							</v-list-tile-content>
 						</v-list-tile>
 					</template>
@@ -176,7 +176,48 @@ export default {
 			return this.$vuetify.breakpoint.mdAndUp;
 		},
 		siteTitle() {
-			return SITE_TITLE_ABBR;
+			return ufhy.SITE_TITLE_ABBR;
+		},
+		menuItems() {
+			const menuItems = ufhy.MENU_ITEMS;
+			let results = [];
+
+			for (const menuItem in menuItems) {
+				if (menuItems.hasOwnProperty(menuItem)) {
+					const rowMenuItem = menuItems[menuItem];
+					
+					for (const menu in rowMenuItem) {
+						if (rowMenuItem.hasOwnProperty(menu)) {
+							const rowMenu = rowMenuItem[menu];
+							if (rowMenu.items) {
+								let childrens = [];
+								for (const subItem in rowMenu.items) {
+									if (rowMenu.items.hasOwnProperty(subItem)) {
+										const rowSubItem = rowMenu.items[subItem];
+										childrens.push({ 
+											text: subItem, 
+											url: rowSubItem.url
+										});
+									}
+								}
+								results.push({ 
+									icon: rowMenu.icon, 
+									text: menu, 
+									childrens
+								});
+							} else {
+								results.push({ 
+									icon: rowMenu.icon, 
+									text: menu, 
+									url: rowMenu.url 
+								});
+							}
+						}
+					}
+				}
+			}
+
+			return results;
 		}
 	},
 	methods: {

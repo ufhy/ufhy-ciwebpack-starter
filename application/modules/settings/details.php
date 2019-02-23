@@ -10,7 +10,7 @@ class Module_Settings{
             'name' => array(
                 'en' => 'Settings',
             ),
-            'icon' => 'ms-Icon ms-Icon--settings',
+            'icon' => 'la la-sliders',
             'menu' => 'settings',
             'menu_group' => 'navigation',
             'roles' => array(

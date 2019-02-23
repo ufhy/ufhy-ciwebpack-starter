@@ -25,23 +25,12 @@
 
 		<uf-search-dialog v-if="!$vuetify.breakpoint.mdAndUp"></uf-search-dialog>
 		<v-toolbar-items>
-			<template v-if="$vuetify.breakpoint.mdAndUp">
-				<v-btn icon>
-					<v-icon>la-globe</v-icon>
-				</v-btn>
-				<v-btn icon>
-					<v-icon>la-sliders</v-icon>
-				</v-btn>
-			</template>
 			<v-btn icon>
 				<v-avatar right size="36px">
 					<img
 						src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
 						alt="Avatar">
 				</v-avatar>
-			</v-btn>
-			<v-btn icon v-if="!$vuetify.breakpoint.mdAndUp">
-				<v-icon>la-ellipsis-v</v-icon>
 			</v-btn>
 		</v-toolbar-items>
 	</v-toolbar>
@@ -70,7 +59,7 @@ export default {
 			}
 		},
 		siteTitle() {
-			return SITE_TITLE_ABBR;
+			return ufhy.SITE_TITLE_ABBR;
 		}
 	},
 	methods: {

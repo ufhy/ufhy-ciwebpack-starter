@@ -12,7 +12,7 @@ class Module_Dashboard {
             ),
             'menu' => 'dashboard',
             'menu_group' => 'navigation',
-            'icon' => 'ms-Icon ms-Icon--boards2',
+            'icon' => 'la la-dashboard',
             'roles' => array(),
             'shortcuts' => array()
         );

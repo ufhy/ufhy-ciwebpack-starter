@@ -19,6 +19,7 @@ class Theme_Auth_theme
             Asset::js('webpack::dist/only-dev-server.js', true, 'webpack-dev-server');
             Asset::js('webpack::dist/webpack-dev-server.js', true, 'webpack-server');
             Asset::js('webpack::dist/profiler.js', true, 'webpack-profiler');
+            Asset::css('webpack::dist/profiler.css', true, 'webpack-profiler');
         }
         else {
             Asset::add_path('webpack', [

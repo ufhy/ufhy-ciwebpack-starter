@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default () => {
   const instance = axios.create({
-    baseURL: API_URL,
+    baseURL: ufhy.API_URL,
     withCredentials: false,
     headers: {
       'Accept': 'application/json',
@@ -21,7 +21,7 @@ export default () => {
       });
       VUE.$toasted.error('Please refresh your browser!');
     } else if (status === 403) {
-      window.location.href = SITE_URL + '/auth/logout';
+      window.location.href = ufhy.SITE_URL + '/auth/logout';
     }
 
     return Promise.reject(error.response);
