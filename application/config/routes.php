@@ -56,4 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['api/([a-zA-Z0-9_-]+)/(:any)'] = '$1/api/$2';
 $route['api/([a-zA-Z0-9_-]+)'] = '$1/api';
 
-$route['(:any)'] = 'app_controller/$1';
+// $route['(:any)'] = 'app_controller/$1';

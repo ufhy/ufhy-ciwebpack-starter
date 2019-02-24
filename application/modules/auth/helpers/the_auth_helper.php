@@ -16,32 +16,6 @@ if (!function_exists('isUserAdmin'))
 	}
 }
 
-if (!function_exists('isUserHeadOffice')) 
-{
-    function isUserHeadOffice()
-    {
-        $user = $this->getUserLogin($userId);
-        if (!$user) {
-            return false;
-        }
-
-        return (bool)$user->branch->is_head_office;
-    }
-}
-
-if (!function_exists('getUserBranch'))
-{
-	function getUserBranch() 
-	{
-        $branchId = ci()->session->userdata('branch_id');
-        if (!empty($branchId)) {
-            return $branchId;
-        }
-
-        return null;
-	}
-}
-
 if (!function_exists('userHasModule'))
 {
     function userHasModule($module)
@@ -124,60 +98,6 @@ if (!function_exists('userHasRoleOrDie'))
 
         return true;
 	}
-}
-
-if (!function_exists('userHasSameScheduleRouteFrom'))
-{
-    function userHasSameScheduleRouteFrom($voyage)
-    {
-        ci()->load->model('schedules/schedule_model');
-        ci()->load->model('reference/branch_office_model');
-
-        $routeVoyage = ci()->schedule_model->fields('id,voyage')
-            ->with('route', array('fields:id,from_city_id'))
-            ->get(['voyage' => $voyage]);
-        if (!$routeVoyage OR !$routeVoyage->route) {
-            return FALSE;
-        }
-
-        if (!isUserAdmin()) {
-            $branchUserLogin = ci()->branch_office_model->fields('id,city_id')->get(['id' => getUserBranch()]);
-            if ($branchUserLogin->city_id != $routeVoyage->route->from_city_id) {
-                return FALSE;
-            }
-        } else {
-            $branchUserLogin = ci()->branch_office_model->fields('id,city_id')->get(['city_id' => $routeVoyage->route->from_city_id]);
-        }
-
-        return $branchUserLogin->id;
-    }
-}
-
-if (!function_exists('userHasSameScheduleRouteTo'))
-{
-    function userHasSameScheduleRouteTo($voyage)
-    {
-        ci()->load->model('schedules/schedule_model');
-        ci()->load->model('reference/branch_office_model');
-
-        $routeVoyage = ci()->schedule_model->fields('id,voyage')
-            ->with('route', array('fields:id,to_city_id'))
-            ->get(['voyage' => $voyage]);
-        if (!$routeVoyage OR !$routeVoyage->route) {
-            return FALSE;
-        }
-
-        if (!isUserAdmin()) {
-            $branchUserLogin = ci()->branch_office_model->fields('id,city_id')->get(['id' => getUserBranch()]);
-            if ($branchUserLogin->city_id != $routeVoyage->route->to_city_id) {
-                return FALSE;
-            }
-        } else {
-            $branchUserLogin = ci()->branch_office_model->fields('id,city_id')->get(['city_id' => $routeVoyage->route->to_city_id]);
-        }
-
-        return $branchUserLogin->id;
-    }
 }
 
 if (!function_exists('getUsersHasRole'))

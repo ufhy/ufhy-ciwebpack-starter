@@ -8,7 +8,9 @@
 		mobile-break-point="1024">
 		<v-toolbar flat dark height="60">
 			<v-toolbar-title v-if="!miniVariant">
-				<span class="font-weight-black white--text">{{siteTitle}}</span>
+				<a :href="siteUrl">
+					<span class="font-weight-black white--text">{{siteTitle}}</span>
+				</a>
 			</v-toolbar-title>
 			<v-spacer v-if="!miniVariant"></v-spacer>
 			<v-toolbar-side-icon @click="onClickSideIcon">
@@ -124,39 +126,6 @@ export default {
 			default: true,
 		}
 	},
-	data() {
-		return {
-			items: [
-				{ icon: 'la-dashboard', text: 'Dashboard', urlName: "dashboard" },
-				{ icon: 'la-font', text: 'Typography', urlName: "typography" },
-				{ icon: 'la-code',  text: 'Helper Class', urlName: "helperclass" },
-				{ icon: 'la-th', text: 'Widgets', urlName: "widgets" },
-				{ 
-					icon: 'la-laptop', 
-					text: 'UI Elements', 
-					childrens: [
-						{ text: 'Colors', urlName: "uielements.colors" },
-						{ text: 'Icons', urlName: "uielements.icons" },
-						{ text: 'Buttons', urlName: "uielements.buttons" },
-						{ text: 'Timeline', urlName: "uielements.timeline" },
-						{ text: 'Dialogs', urlName: "uielements.dialogs" },
-					] 
-				},
-				{ 
-					icon: 'la-edit', 
-					text: 'Forms', 
-					childrens: [
-						{ text: 'General', urlName: "forms.general" },
-						{ text: 'Advanced', urlName: "forms.advanced" },
-						{ text: 'Editors', urlName: "forms.editors" },
-					] 
-				},
-				{ icon: 'la-table', text: 'Datatables', urlName: "datatables" },
-				{ icon: 'la-calendar', text: 'Calendar', urlName: "calendar" },
-				{ icon: 'la-envelope', text: 'Mailbox', urlName: "mailbox" },
-      ]
-		}
-	},
 	computed: {
 		drawer: {
 			set(value) {
@@ -178,6 +147,9 @@ export default {
 		siteTitle() {
 			return ufhy.SITE_TITLE_ABBR;
 		},
+		siteUrl() {
+			return ufhy.SITE_URL;
+		},
 		menuItems() {
 			const menuItems = ufhy.MENU_ITEMS;
 			let results = [];
@@ -196,7 +168,7 @@ export default {
 										const rowSubItem = rowMenu.items[subItem];
 										childrens.push({ 
 											text: subItem, 
-											url: rowSubItem.url
+											url: '/' + rowSubItem.url
 										});
 									}
 								}
@@ -209,7 +181,7 @@ export default {
 								results.push({ 
 									icon: rowMenu.icon, 
 									text: menu, 
-									url: rowMenu.url 
+									url: '/' + rowMenu.url 
 								});
 							}
 						}

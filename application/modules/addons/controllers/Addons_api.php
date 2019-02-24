@@ -15,6 +15,25 @@ class Addons_api extends Api_Controller
 
     public function i18n()
     {
-        $this->template->build_json($this->lang->language);
+        if (!$this->input->get('module'))
+        {
+            $this->template->build_json($this->lang->language);
+            return false;
+        }
+
+        $module = $this->input->get('module');
+        $langs = [];
+        if ($module) {
+            $lang = '';
+            $deft_lang = $this->config->item('language');
+            $idiom = ($lang == '') ? $deft_lang : $lang;
+            list($path, $_langfile) = Modules::find($module . '_lang', $module, 'language/' . $idiom . '/');
+
+            if ($path) {
+                $langs = Modules::load_file($_langfile, $path, 'lang');
+            }
+        }
+
+        $this->template->build_json($langs);
     }
 }

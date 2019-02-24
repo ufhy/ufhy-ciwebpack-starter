@@ -18,7 +18,7 @@ export default {
 
       this.$route.matched.forEach(element => {
         breadcrumbs.push({
-					text: element.meta.title,
+					text: that.$t(element.meta.title),
 					disabled: false,
 					to: element.path
 				})

@@ -1,4 +1,4 @@
-const Index = () => import('./index.vue');
+const Index = () => import('./Index.vue');
 
 export default {
 	path: 'user',

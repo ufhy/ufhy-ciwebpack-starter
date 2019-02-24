@@ -1,15 +1,21 @@
 .v-input {
 	&.v-text-field--outline {
-		& > .v-input__control > .v-input__slot {
-			border: 1px solid rgba(0,0,0,.07);
+		.v-label {
+			top: 15px;
 		}
+		input {
+			max-height: 35px;
+		}
+	}
+
+	.v-label {
+		font-size: 14px;
 	}
 }
 
 .v-text-field--solo.v-text-field--solo-flat {
 	> .v-input__control > .v-input__slot {
 		border: 1px solid #E0E0E0; 	//grey lighten-2
-
 	}
 }
 
@@ -25,4 +31,20 @@
 			color: #424242;
 		}
 	}*/
+}
+
+.v-text-field {
+	input {
+		line-height: inherit;
+	}
+	.v-label--active {
+		transform: translateY(-20px) scale(0.90);
+	}
+}
+
+.v-text-field__details {
+	.v-messages__message {
+		line-height: 1.5;
+		margin-bottom: 5px;
+	}
 }

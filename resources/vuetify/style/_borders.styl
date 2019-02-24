@@ -1,0 +1,53 @@
+global-border($color_name, $color_value)
+  .{$color_name}--border
+    border-color: $color_value !important
+
+global-border-accent($color_name, $color_value, $color_type)
+  .{$color_name}--border
+    &.border--{$color_type}
+      border-color: $color_value !important
+
+// Put the loop in a function so it can't leak
+create-global-borders()
+  for $color_name, $color_value in $shades
+    global-border($color_name, $color_value)
+
+  if ($color-pack)
+    for $color_name, $color_color in $colors
+      for $color_type, $color_value in $color_color
+        if $color_type == 'base'
+          global-border($color_name, $color_value)
+
+        else if $color_type != 'shades'
+          global-border-accent($color_name, $color_value, $color_type)
+
+create-global-borders()
+
+$border-radius    = 6px;
+$border-radius-lg = 8px;
+$border-radius-sm = 4px;
+
+.ba-0 {
+	border-width: 0;
+}
+.ba-solid-1 {
+	border-width: 1px!important;
+	border-style: solid!important;
+	border-color: #dadce0;
+}
+
+.ba-round {
+  border-radius: $border-radius!important;
+  padding-top: $border-radius;
+  padding-bottom: $border-radius;
+}
+.ba-round-sm {
+  border-radius: $border-radius-sm!important;
+  padding-top: $border-radius-sm;
+  padding-bottom: $border-radius-sm;
+}
+.ba-round-lg {
+  border-radius: $border-radius-lg!important;
+  padding-top: $border-radius-lg;
+  padding-bottom: $border-radius-lg;
+}

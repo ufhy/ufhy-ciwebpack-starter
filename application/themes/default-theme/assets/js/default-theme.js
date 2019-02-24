@@ -4,7 +4,6 @@ if (ENV === 'production') {
 }
 
 import Vue from 'vue';
-import vuexI18n from 'vuex-i18n';
 import _ from 'lodash';
 
 import router from './router';
@@ -13,11 +12,15 @@ import api from './utils/api';
 import Uftify from './layouts/Uftify.vue'
 import '../scss/default-theme.scss';
 
+import vuexI18n from 'vuex-i18n';
 Vue.use(vuexI18n.plugin, store, {
   translateFilterName: 't'
 });
 Vue.i18n.add(ufhy.LANG, ufhy.LANGS);
 Vue.i18n.set(ufhy.LANG);
+
+import UfSnackbars from './components/UfSnackbars'
+Vue.use(UfSnackbars);
 
 Vue.prototype.$axios = api();
 Vue.prototype.$lodash = _;
@@ -26,7 +29,33 @@ window.VUE = new Vue({
   router,
   store,
   created() {
-    
+    this.reThemeVuetify();
+  },
+  methods: {
+    reThemeVuetify() {
+      //color
+      console.log(this.$vuetify);
+      this.$vuetify.theme.accent = "#1565C0";
+      this.$vuetify.theme.error = "#FF5252";
+      this.$vuetify.theme.info = "#2196F3";
+      this.$vuetify.theme.primary = "#1565C0";
+      this.$vuetify.theme.secondary = "#424242";
+      this.$vuetify.theme.success = "#4CAF50";
+      this.$vuetify.theme.warning = "#FB8C00";
+
+      // icons
+      this.$vuetify.icons.next = 'la-angle-right';
+      this.$vuetify.icons.prev = 'la-angle-left';
+      this.$vuetify.icons.dropdown = 'la-angle-down';
+      this.$vuetify.icons.sort = 'la-arrow-up';
+      this.$vuetify.icons.checkboxIndeterminate = "la-minus-square";
+      this.$vuetify.icons.checkboxOff = "la-square-o";
+      this.$vuetify.icons.checkboxOn = "la-check-square";
+      this.$vuetify.icons.error = "la-warning";
+      this.$vuetify.icons.success = "la-check-circle";
+      this.$vuetify.icons.cancel = "la-times-circle";
+      this.$vuetify.icons.close = "la-times-circle";
+    }
   },
   render: h => h(Uftify)
 }).$mount('#root');

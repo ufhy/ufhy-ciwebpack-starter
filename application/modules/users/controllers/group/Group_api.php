@@ -24,19 +24,23 @@ class Group_api extends Api_Controller
 
     public function index()
     {
-        $this->load->library('bt_server');
+        $this->load->library('datatables_server');
         $request = $this->input->get();
         $columns = [
             ['db' => 'id', 'bt' => 'id'],
             ['db' => 'name', 'bt' => 'name'],
             ['db' => 'description', 'bt' => 'descr'],
-            ['db' => 'is_default', 'bt' => 'isDefault'],
-            ['db' => 'is_admin', 'bt' => 'isAdmin'],
+            ['db' => 'is_default', 'bt' => 'isDefault', 'formatter' => function($value) {
+                return $value > 0;
+            }],
+            ['db' => 'is_admin', 'bt' => 'isAdmin', 'formatter' => function ($value) {
+                return $value > 0;
+            }],
             ['db' => 'created_at', 'bt' => 'createdAt'],
             ['db' => 'updated_at', 'bt' => 'updatedAt'],
         ];
 
-        $results = $this->bt_server->process($request, $columns, $this->group_model->table);
+        $results = $this->datatables_server->process($request, $columns, $this->group_model->table);
         $this->template->build_json($results);
     }
 
@@ -66,8 +70,8 @@ class Group_api extends Api_Controller
             'id'        => $item->id,
             'name'      => $item->name,
             'descr'     => $item->description,
-            'isDefault' => $item->is_default,
-            'isAdmin'   => $item->is_admin,
+            'isDefault' => $item->is_default > 0,
+            'isAdmin'   => $item->is_admin > 0,
             'createdAt' => $item->created_at,
             'updatedAt' => $item->updated_at,
         ];

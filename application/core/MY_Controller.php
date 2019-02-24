@@ -18,6 +18,7 @@
  * @property The_file $the_file
  * @property Group_permission_model $group_permission_model
  * @property Module_model $module_model
+ * @property Datatables_server $datatables_server
  */
 class MY_Controller extends MX_Controller
 {
@@ -33,7 +34,7 @@ class MY_Controller extends MX_Controller
         parent::__construct();
 
         $this->load->library(['session','asset','template','settings/setting','auth/the_auth']);
-        $this->load->helper(['language','url','form','html','application','bootstrap']);
+        $this->load->helper(['language','url','form','html','application']);
         $this->load->model(['addons/module_model','users/group_permission_model']);
 
         // set template theme

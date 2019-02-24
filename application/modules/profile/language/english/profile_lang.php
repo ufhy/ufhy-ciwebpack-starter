@@ -1,13 +1,13 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-$lang['profile::full_name'] = 'Nama lengkap';
-$lang['profile::nik'] = 'NIK';
-$lang['profile::position'] = 'Jabatan';
+$lang['profile::full_name'] = 'Full name';
 $lang['profile::email'] = 'Email';
+$lang['profile::phone'] = 'Phone';
 $lang['profile::username'] = 'Username';
-$lang['profile::old_password'] = 'Kata sandi lama';
-$lang['profile::new_password'] = 'kata sandi baru';
-$lang['profile::confirm_new_password'] = 'Ulangi kata sandi';
+$lang['profile::old_password'] = 'Old password';
+$lang['profile::new_password'] = 'New password';
+$lang['profile::confirm_new_password'] = 'Repeat new password';
+$lang['profile::change_password'] = 'Change password';
 
 $lang['msg::profile::nik_already_exist'] = 'NIK "%s" sudah terdaftar.';
 $lang['msg::profile::username_already_exist'] = 'Username "%s" sudah terdaftar.';

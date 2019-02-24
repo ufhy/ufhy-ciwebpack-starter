@@ -20,10 +20,24 @@ class Backend_Controller extends MY_Controller
         // set default language already loaded
         ci()->template->append_metadata(
             sprintf(
-                '<script>ufhy.LANGS = %s</script>',
+                '<script>ufhy.LANGS = %s;</script>',
                 json_encode($this->lang->language)
             )
         );
+
+        // set profile user login
+        if (isLoggedIn()) {
+            ci()->template->append_metadata(
+                sprintf(
+                    '<script>ufhy.USER = %s;</script>',
+                    json_encode([
+                        'fullName' => $this->_currentUser->profile->full_name,
+                        'username' => $this->_currentUser->username,
+                        'email' => $this->_currentUser->email,
+                    ])
+                )
+            );
+        }
 
         $this->template->active_section = $this->_section;
         $this->_buildNavigation();

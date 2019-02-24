@@ -1,152 +1,107 @@
 <template>
-  <div class="container">
-    <app-page-header title="Profile"></app-page-header>
-    <b-form @submit.prevent="saveChanges" type="post">
-      <b-form-group
-        horizontal
-        label-class="required"
-        label="Nama lengkap"
-        label-for="user-full-name"
-        :invalid-feedback="errorMsg.fullName"
-        label-cols="2"
-      >
-        <b-form-input
-          id="user-full-name"
-          name="user-full-name"
-          :state="errorMsg.fullName.length > 1 ? false : null"
-          v-model.trim="item.fullName"
-          placeholder="Nama lengkap"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        horizontal
-        label="Telepon"
-        label-for="user-phone"
-        :invalid-feedback="errorMsg.phone"
-        label-cols="2"
-      >
-        <b-form-input
-          id="user-phone"
-          name="user-phone"
-          :state="errorMsg.phone.length > 1 ? false : null"
-          v-model.trim="item.phone"
-          placeholder="Telepon"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        horizontal
-        label-class="required"
-        label="Email"
-        label-for="user-email"
-        :invalid-feedback="errorMsg.email"
-        label-cols="2"
-      >
-        <b-form-input
-          id="user-email"
-          name="user-email"
-          :state="errorMsg.email.length > 1 ? false : null"
-          v-model.trim="item.email"
-          placeholder="Email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        horizontal
-        label-class="required"
-        label="Username"
-        label-for="user-username"
-        :invalid-feedback="errorMsg.username"
-        label-cols="2"
-      >
-        <b-form-input
-          id="user-username"
-          name="user-username"
-          :state="errorMsg.username.length > 1 ? false : null"
-          v-model.trim="item.username"
-          placeholder="Username"
-        ></b-form-input>
-      </b-form-group>
+  <v-container fluid fill-height class="white">
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8>
+        <form @submit.prevent="saveChanges" type="post">
+          <div class="display-1 font-weight-thin text-xs-center mb-4">
+            Personal info
+          </div>
+          <v-card flat class="ba-solid-1 ba-round-lg grey--border border--lighten-2">
+            <v-card-text class="pa-4">
+              <v-layout row wrap>
+                <v-flex xs12 md7>
+                  <v-text-field outline
+                    class="uf-text-field--outline"
+                    :label="$t('profile::full_name')"
+                    :placeholder="$t('profile::full_name')"
+                    v-model="item.fullName"
+                    :error-messages="errorMsg.fullName"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md5>
+                  <v-text-field outline
+                    class="uf-text-field--outline"
+                    :label="$t('profile::username')"
+                    :placeholder="$t('profile::username')"
+                    v-model="item.username"
+                    :error-messages="errorMsg.username"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
 
-      <div class="form-group row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-          <b-form-checkbox 
-            id="change-password"
-            v-model="item.changePassword">Ubah password</b-form-checkbox>
-        </div>
-      </div>
+              <v-layout row wrap>
+                <v-flex xs12 md6>
+                  <v-text-field outline
+                    class="uf-text-field--outline"
+                    :label="$t('profile::email')"
+                    placeholder="email@domain.com"
+                    v-model="item.email"
+                    :error-messages="errorMsg.email"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field outline
+                    class="uf-text-field--outline"
+                    :label="$t('profile::phone')"
+                    :placeholder="$t('profile::phone')"
+                    v-model="item.phone"
+                    :error-messages="errorMsg.phone"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
 
-      <template v-if="item.changePassword">
-        <b-form-group
-          horizontal
-          label-class="required"
-          label="Kata sandi lama"
-          label-for="user-old-password"
-          :invalid-feedback="errorMsg.oldPassword"
-          label-cols="2">
-          <b-form-input
-            id="user-old-password"
-            name="user-old-password"
-            type="password"
-            :state="errorMsg.oldPassword.length > 1 ? false : null"
-            v-model.trim="item.oldPassword"
-            placeholder="Kata sandi lama"></b-form-input>
-        </b-form-group>
-        <b-form-group
-          horizontal
-          label-class="required"
-          label="Kata sandi"
-          label-for="user-new-password"
-          :invalid-feedback="errorMsg.newPassword"
-          label-cols="2">
-          <b-form-input
-            id="user-new-password"
-            name="user-new-password"
-            type="password"
-            :state="errorMsg.newPassword.length > 1 ? false : null"
-            v-model.trim="item.newPassword"
-            placeholder="Kata sandi baru"></b-form-input>
-        </b-form-group>
-        <b-form-group
-          horizontal
-          label-class="required"
-          label="Ulangi kata sandi"
-          label-for="user-confirm-new-password"
-          :invalid-feedback="errorMsg.confirNewPassword"
-          label-cols="2"
-        >
-          <b-form-input
-            id="user-confirm-new-password"
-            name="user-confirm-new-password"
-            type="password"
-            :state="errorMsg.confirNewPassword.length > 1 ? false : null"
-            v-model.trim="item.confirNewPassword"
-            placeholder="Ulangi kata sandi"
-          ></b-form-input>
-        </b-form-group>
-      </template>
+              <v-checkbox
+                v-model="item.changePassword"
+                :label="$t('profile::change_password')"
+              ></v-checkbox>
+              <template v-if="item.changePassword">
+                <v-layout row wrap>
+                  <v-flex xs12 md4>
+                    <v-text-field outline
+                      class="uf-text-field--outline"
+                      :label="$t('profile::old_password')"
+                      :placeholder="$t('profile::old_password')"
+                      v-model="item.oldPassword"
+                      :error-messages="errorMsg.oldPassword"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 md4>
+                    <v-text-field outline
+                      class="uf-text-field--outline"
+                      :label="$t('profile::new_password')"
+                      :placeholder="$t('profile::new_password')"
+                      v-model="item.newPassword"
+                      :error-messages="errorMsg.newPassword"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 md4>
+                    <v-text-field outline
+                      class="uf-text-field--outline"
+                      :label="$t('profile::confirm_new_password')"
+                      :placeholder="$t('profile::confirm_new_password')"
+                      v-model="item.confirNewPassword"
+                      :error-messages="errorMsg.confirNewPassword"
+                    ></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </template>
+            </v-card-text>
 
-      <hr />
-
-      <div class="form-group row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-          <b-btn type="submit" variant="primary" :disabled="loading" style="margin-left: 0">
-            SIMPAN <i class="icon ms-Icon--save icon-right"></i>
-          </b-btn>
-        </div>
-      </div>
-    </b-form>
-  </div>
+            <v-card-actions class="pa-3">
+              <v-btn color="primary" :loading="loading" type="submit">
+                <v-icon left>la-save</v-icon>Submit
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </form>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-const AppPageHeader = () => import('../../components/AppPageHeader.vue');
-const AppLoader = () => import('../../components/AppLoader.vue');
 export default {
   name: 'profile-page',
-  components: {
-    AppLoader, AppPageHeader
-  },
   data() {
     return {
       loading: false,
@@ -216,15 +171,9 @@ export default {
         .catch(error => {
           const {statusText, data} = error;
           if (typeof data.message !== "undefined") {
-            this.$toasted.error(data.message, {
-              fullWidth: true,
-              fitToScreen: true,
-            });
+            this.$ufsnackbars.error(data.message);
           } else {
-            this.$toasted.error(statusText, {
-              fullWidth: true,
-              fitToScreen: true,
-            });
+            this.$ufsnackbars.error(statusText);
           }
         })
         .then(() => {
@@ -237,7 +186,7 @@ export default {
       }
 
       this.clearMessage();
-      this.$toasted.clear();
+      this.$ufsnackbars.hide();
       this.loading = true;
 
       const item = new FormData();
@@ -256,21 +205,17 @@ export default {
       this.$axios.post('profile/save-changes', item)
         .then(response => {
           const { data } = response;
-          this.$toasted.show(data.message, {
+          this.$ufsnackbars.show(data.message, {
             type: data.success ? 'success' : 'error'
           });
 
           if (data.success) {
-            this.loading = false;
             this.fetchItem();
           }
         })
         .catch(error => {
           const {statusText, data} = error;
-          this.$toasted.error(statusText, {
-            fullWidth: true,
-            fitToScreen: true,
-          });
+          this.$ufsnackbars.error(statusText);
 
           if (typeof data !== "undefined" && typeof data.message !== "undefined") {
             if (typeof data.message === 'object') {

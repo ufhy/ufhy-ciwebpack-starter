@@ -3,14 +3,20 @@
 		th {
 			font-size: 10.5px;
 			letter-spacing: .06em;
-			font-weight: bold;
-			text-transform: uppercase
+			text-transform: uppercase;
+
 		}
 		thead tr {
 			height: auto;
 			th {
 				padding-bottom: 8px;
 				padding-top: 16px;
+				&.column.sortable.active {
+					color: $primary;
+					.v-icon {
+						color: $primary;
+					}
+				}
 			}
 
 			&:first-child {

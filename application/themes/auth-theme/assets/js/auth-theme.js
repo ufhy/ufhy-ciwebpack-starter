@@ -41,6 +41,7 @@ window.VUE = new Vue({
       this.$vuetify.icons.checkboxOff = "la-square-o";
       this.$vuetify.icons.checkboxOn = "la-check-square";
       this.$vuetify.icons.error = "la-warning";
+      this.$vuetify.icons.success = "la-check-circle";
       this.$vuetify.icons.cancel = "la-times-circle";
       this.$vuetify.icons.close = "la-times-circle";
     }

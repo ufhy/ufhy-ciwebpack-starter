@@ -1,6 +1,19 @@
 <?php
 
 $lang['label::id'] = 'ID';
+$lang['lb::profile'] = 'Profile';
+$lang['lb::logout'] = 'Logout';
+$lang['lb::search'] = 'Search';
+$lang['lb::status'] = 'Status';
+$lang['lb::updated_at'] = 'Updated at';
+$lang['lb::edit'] = 'Edit';
+$lang['lb::remove'] = 'Remove';
+$lang['lb::create'] = 'New';
+$lang['lb::save_close'] = 'Save & Close';
+$lang['lb::save'] = 'Save';
+$lang['lb::cancel'] = 'Cancel';
+$lang['lb::close'] = 'Close';
+
 
 $lang['msg::must_login'] = 'You must login to acces that page';
 $lang['msg::access_denied'] = 'Unable to access the page.';

@@ -1,5 +1,5 @@
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import './style/commons.styl'
 
 /*
 Vue.use(Vuetify, {

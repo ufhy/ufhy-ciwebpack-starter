@@ -1,0 +1,19 @@
+.uf-text-field--outline {
+	& > .v-input__control > .v-input__slot {
+		background-color: #ffffff!important;
+	}
+} 
+.theme--light.uf-text-field--outline {
+	& > .v-input__control > .v-input__slot {
+		border: 1px solid #E0E0E0;
+	}
+	&:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control >.v-input__slot:hover {
+		border: 1px solid $primary;
+	}
+	&.v-input--is-focused:not(.v-input--has-state) > .v-input__control >.v-input__slot {
+		border: 1px solid $primary;
+	}
+	&.v-input--has-state > .v-input__control >.v-input__slot {
+		border: 1px solid $error;
+	}
+} 
