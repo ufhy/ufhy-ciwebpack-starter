@@ -17,7 +17,9 @@ class Settings_api extends Api_Controller
 
     public function index()
     {
-        $settings = $this->setting_model->as_array()->get_all(['is_gui' => 1]);
+        $settings = $this->setting_model->as_array()
+            ->order_by('module', 'asc')
+            ->get_all(['is_gui' => 1]);
         if (!$settings) {
             $this->output->set_status_header(400, lang('msg::request_failed'));
             $this->template->build_json([

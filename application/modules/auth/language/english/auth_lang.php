@@ -28,8 +28,10 @@ $lang['auth::user_not_exist'] = 'User not found in list';
 $lang['auth::change_password_successful'] = 'Changed password success';
 $lang['auth::change_password_unsuccessful'] = 'Changed password not success';
 
-$lang['auth:user_remove_successful'] = 'User remove success';
-$lang['auth:user_remove_unsuccessful'] = 'User remove not success';
+$lang['auth::user_remove_successful'] = 'User remove success';
+$lang['auth::user_remove_unsuccessful'] = 'User remove not success';
 
-$lang['auth:user_update_successful'] = 'User update success';
-$lang['auth:user_update_unsuccessful'] = 'User update not success';
+$lang['auth::user_update_successful'] = 'User update success';
+$lang['auth::user_update_unsuccessful'] = 'User update not success';
+
+$lang['auth::msg:access_denied'] = 'Access denied';
