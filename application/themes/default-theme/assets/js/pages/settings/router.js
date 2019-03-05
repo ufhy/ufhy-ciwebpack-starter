@@ -3,7 +3,7 @@ const Index = () => import('./Index.vue');
 export default {
 	path: '/settings',
 	meta: {
-		title: 'Settings',
+		title: 'menu::settings',
 		breadcrumb: true,
 		module: 'settings',
 		role: 'read'

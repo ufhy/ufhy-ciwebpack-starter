@@ -15,7 +15,12 @@ const router = new Router({
   routes: paths,
 });
 
-const loadI18n = (module) => {
+const loadI18n = async (module) => {
+  const isLoaded = await store.dispatch('localisation/isLoaded', module);
+  if (isLoaded) {
+    return false;
+  }
+
   return api().get('addons/i18n', {
     params: {
       module: module
@@ -23,6 +28,7 @@ const loadI18n = (module) => {
   }).then(response => {
     const { data } = response;
     Vue.i18n.add(ufhy.LANG, data);
+    store.dispatch('localisation/addI18n', module);
   })
 }
 

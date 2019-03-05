@@ -11,7 +11,7 @@ export default {
 		items() {
 			const that = this;
       let breadcrumbs = [{
-				text: 'Home',
+				text: ufhy.SITE_TITLE_ABBR,
 				disabled: false,
 				to: '/'
       }];
@@ -23,7 +23,7 @@ export default {
 					to: element.path
 				})
 			});
-			breadcrumbs[breadcrumbs.length - 1].disabled = true;
+			// breadcrumbs[breadcrumbs.length - 1].disabled = true;
       return breadcrumbs;
 		}
 	}

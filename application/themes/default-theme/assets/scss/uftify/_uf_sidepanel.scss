@@ -1,0 +1,25 @@
+.uf-sidepanel {
+	.v-toolbar {
+		background-color: #272b35;
+	}
+	.v-toolbar__title {
+		font-size: 16px;
+	}
+}
+
+.uf-sidepanel__content {
+	height: calc(100% - 50px);
+	overflow-y: auto;
+	position: relative;
+}
+.uf-sidepanel__progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.6509803921568628);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

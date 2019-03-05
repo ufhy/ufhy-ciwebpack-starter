@@ -3,7 +3,7 @@ const Index = () => import('./index.vue');
 export default {
 	path: '/dashboard',
 	meta: {
-		title: 'Dashboard',
+		title: 'menu::dashboard',
 	},
 	name: 'dashboard.index',
 	component: Index,

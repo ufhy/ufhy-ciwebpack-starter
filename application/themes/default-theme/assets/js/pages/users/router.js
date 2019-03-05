@@ -9,7 +9,8 @@ export default {
 	path: '/users',
 	redirect: '/dashboard',
 	meta: {
-		title: 'Users'
+		title: 'menu::users',
+		module: 'users'
 	},
 	component: Component,
 	children: [

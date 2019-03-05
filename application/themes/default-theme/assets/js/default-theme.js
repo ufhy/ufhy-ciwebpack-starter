@@ -22,6 +22,9 @@ Vue.i18n.set(ufhy.LANG);
 import UfSnackbars from './components/UfSnackbars'
 Vue.use(UfSnackbars);
 
+import VuetifyConfirm from 'vuetify-confirm/src/index';
+Vue.use(VuetifyConfirm);
+
 Vue.prototype.$axios = api();
 Vue.prototype.$lodash = _;
 
@@ -55,6 +58,21 @@ window.VUE = new Vue({
       this.$vuetify.icons.success = "la-check-circle";
       this.$vuetify.icons.cancel = "la-times-circle";
       this.$vuetify.icons.close = "la-times-circle";
+    },
+    confirmDanger(message) {
+      const that = this;
+      return new Promise((resolve, reject) => {
+        that.$confirm(message, {
+          title: 'Danger',
+          buttonTrueText: 'Ok',
+          buttonTrueColor: 'error',
+          buttonFalseText: 'Cancel',
+          color: 'error',
+          icon: 'la-exclamation-triangle'
+        }).then(res => {
+          resolve(res);
+        })
+      });
     }
   },
   render: h => h(Uftify)

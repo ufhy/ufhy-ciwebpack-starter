@@ -1,4 +1,5 @@
 import api from './api';
+import { sprintf } from 'sprintf-js';
 
 export const fetchDtRows = (url, pagination, search = '') => {
 	const { sortBy, descending, page, rowsPerPage } = pagination;
@@ -19,3 +20,5 @@ export const fetchDtRows = (url, pagination, search = '') => {
 		});
 	});
 }
+
+export const formmater = sprintf;

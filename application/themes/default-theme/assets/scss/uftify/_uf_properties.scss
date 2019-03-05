@@ -1,0 +1,29 @@
+.uf-properties {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.uf-properties__heading {
+	margin-bottom: 20px;
+	.v-list__tile__title {
+		font-size: 20px;
+		font-weight: 300;
+	}
+	.v-list__tile__sub-title {
+		font-weight: normal;
+	}
+}
+
+.uf-properties__item {
+	.v-list__tile {
+		height: 30px!important;
+	}
+	.v-list__tile__avatar {
+		min-width: 100px;
+		font-weight: normal;
+		color: rgba(0,0,0,0.54);
+	}
+	.v-list__tile__title {
+		font-weight: normal;
+	}
+}

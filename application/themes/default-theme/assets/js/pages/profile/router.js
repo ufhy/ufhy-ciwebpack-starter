@@ -3,7 +3,7 @@ const Index = () => import('./Index.vue');
 export default {
 	path: '/profile',
 	meta: {
-		title: 'Profile',
+		title: 'menu::profile',
 		breadcrumb: false,
 		module: 'profile',
 		role: 'read'

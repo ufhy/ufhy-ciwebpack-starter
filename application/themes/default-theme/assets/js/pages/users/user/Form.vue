@@ -116,7 +116,6 @@ export default {
           const { data } = response;
           const row = data.data;
 
-          this.row.id = row.id;
           this.row.name = row.name;
           this.row.descr = row.descr;
           this.row.isDefault = row.isDefault;
@@ -147,7 +146,7 @@ export default {
 
       let url = 'users/group/create';
       if (this.mode === 'edit') {
-        item.set('id', this.row.id);
+        item.set('id', this.item.id);
         url = 'users/group/edit';
       }
 

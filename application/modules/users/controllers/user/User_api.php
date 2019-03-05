@@ -31,11 +31,10 @@ class User_api extends Api_Controller
 
     public function index()
     {
-        $this->load->library('bt_server');
+        $this->load->library('datatables_server');
 
         $this->load->model('users/profile_model');
         $this->load->model('users/group_model');
-        $this->load->model('reference/branch_office_model');
 
         $request = $this->input->get();
         $userTable = $this->user_model->table;
@@ -48,25 +47,21 @@ class User_api extends Api_Controller
             }],
             ['db' => $userTable.'.lang', 'bt' => 'lang'],
             ['db' => $userTable.'.group_id', 'bt' => 'groupId'],
-            ['db' => $userTable.'.branch_id', 'bt' => 'branchId'],
             ['db' => $userTable.'.last_login', 'bt' => 'lastLogin'],
             ['db' => $userTable.'.created_at', 'bt' => 'createdAt'],
             ['db' => $userTable.'.updated_at', 'bt' => 'updatedAt'],
         ];
         $profileTable = $this->profile_model->table;
         $groupTable = $this->group_model->table;
-        $branchOfficeTable = $this->branch_office_model->table;
 
-        $results = $this->bt_server
+        $results = $this->datatables_server
             ->setTableJoin(
                 $profileTable,
                 sprintf('%s.user_id = %s.id' , $profileTable, $userTable),
                 [
                     ['db' => $profileTable.'.full_name', 'bt' => 'fullName'],
                     ['db' => $profileTable.'.phone', 'bt' => 'phone'],
-                    ['db' => $profileTable.'.photo_file', 'bt' => 'photoFile'],
-                    ['db' => $profileTable.'.nik', 'bt' => 'nik'],
-                    ['db' => $profileTable.'.position', 'bt' => 'position'],
+                    ['db' => $profileTable.'.photo_file', 'bt' => 'photoFile']
                 ],
                 'LEFT'
             )
@@ -74,12 +69,6 @@ class User_api extends Api_Controller
                 $groupTable,
                 sprintf('%s.group_id = %s.id' , $userTable, $groupTable),
                 [ ['db' => $groupTable.'.name', 'bt' => 'groupName'] ],
-                'LEFT'
-            )
-            ->setTableJoin(
-                $branchOfficeTable,
-                sprintf('%s.branch_id = %s.id' , $userTable, $branchOfficeTable),
-                [ ['db' => $branchOfficeTable.'.name', 'bt' => 'branchName'] ],
                 'LEFT'
             )
             ->process($request, $columns, $userTable);
@@ -98,7 +87,10 @@ class User_api extends Api_Controller
         }
 
         $id = $this->input->get('id', TRUE);
-        $item = $this->user_model->fields('*')->get(['id' => $id]);
+        $item = $this->user_model->fields('*')
+            ->with('profile', ['fields:full_name,phone,photo_file'])
+            ->with('group', ['fields:id,name,is_admin'])
+            ->get(['id' => $id]);
         if (!$item) {
             $this->output->set_status_header('404');
             $this->template->build_json([
@@ -108,27 +100,31 @@ class User_api extends Api_Controller
             return false;
         }
 
-        $profile = $this->profile_model->get(['user_id' => $item->id]);
-
         $data = [
-            'id' => $item->id,
-            'email' => $item->email,
-            'username' => $item->username,
-            'branchId' => $item->branch_id,
-            'groupId' => $item->group_id,
-            'active' => (bool) $item->active,
-            'lastLogin' => $item->last_login,
-            'createdAt' => $item->created_at,
-            'updatedAt' => $item->updated_at,
-            'fullName' => $profile ? $profile->full_name : '',
-            'phone' => $profile ? $profile->phone : '',
-            'nik' => $profile ? $profile->nik : '',
-            'position' => $profile ? $profile->position : '',
+            'id'                => $item->id,
+            'email'             => $item->email,
+            'username'          => $item->username,
+            'groupId'           => $item->group_id,
+            'active'            => (bool) $item->active,
+            'lastLogin'         => $item->last_login,
+            'lang'              => $item->lang,
+            'createdAt'         => $item->created_at,
+            'updatedAt'         => $item->updated_at,
+            'profile' => [
+                'fullName'      => $item->profile ? $item->profile->full_name : '',
+                'phone'         => $item->profile ? $item->profile->phone : '',
+                'photo'         => $item->profile ? $item->profile->photo_file : '',
+            ],
+            'group' => [
+                'id'            => $item->group ? $item->group->id : '',
+                'name'          => $item->group ? $item->group->name : '',
+                'isAdmin'       => $item->group ? $item->group->is_admin > 0 : '',
+            ],
         ];
 
         $this->template->build_json([
             'success' => true,
-            'data' => $data
+            'row' => $data
         ]);
         return true;
     }

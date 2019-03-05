@@ -11,11 +11,8 @@
         <v-btn icon flat color="primary" @click="refreshAction">
           <v-icon>la-refresh</v-icon>
         </v-btn>
-        <v-btn icon flat color="error" class="ml-0">
-          <v-icon>la-trash</v-icon>
-        </v-btn>
       </v-card-title>
-      <v-data-table :select-all="$vuetify.breakpoint.mdAndUp"
+      <v-data-table
         class="uf-datatable"
         item-key="id"
         v-model="selected"
@@ -25,38 +22,6 @@
         :total-items="totalItems"
         :loading="loading">
         <template slot="items" slot-scope="props">
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <td width="50" class="pa-0">
-              <v-checkbox small hide-details
-                class="justify-center"
-                v-model="props.selected"
-                color="primary"
-              ></v-checkbox>
-            </td>
-          </template>
-          <td>
-            <v-menu offset-x>
-              <v-btn icon small flat
-                slot="activator"
-                color="primary">
-                <v-icon>la-ellipsis-v</v-icon>
-              </v-btn>
-              <v-list dense>
-                <v-list-tile :to="{name: 'users.group.edit', params:{id:props.item.id}}">
-                  <v-list-tile-avatar size="">
-                    <v-icon class="primary--text">la-edit</v-icon>
-                  </v-list-tile-avatar>
-                  <v-list-tile-title>{{ $t('lb::edit') }}</v-list-tile-title>
-                </v-list-tile>
-                <v-list-tile @click="removeAction(item)">
-                  <v-list-tile-avatar size="">
-                    <v-icon class="error--text">la-trash</v-icon>
-                  </v-list-tile-avatar>
-                  <v-list-tile-title>{{ $t('lb::remove') }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </td>
           <td>{{ props.item.name }}</td>
           <td>{{ props.item.descr }}</td>
           <td>
@@ -73,7 +38,30 @@
               color="primary"
             ></v-checkbox>
           </td>
-          <td class="text-xs-right">{{ props.item.updatedAt }}</td>
+          <td>{{ props.item.updatedAt }}</td>
+          <td>
+            <v-menu offset-y>
+              <v-btn icon small flat
+                slot="activator"
+                color="primary">
+                <v-icon>la-ellipsis-v</v-icon>
+              </v-btn>
+              <v-list dense>
+                <v-list-tile :to="{name: 'users.group.edit', params:{id:props.item.id}}">
+                  <v-list-tile-avatar size="">
+                    <v-icon class="primary--text">la-edit</v-icon>
+                  </v-list-tile-avatar>
+                  <v-list-tile-title>{{ $t('lb::edit') }}</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile @click="removeAction(props.item)">
+                  <v-list-tile-avatar size="">
+                    <v-icon class="error--text">la-trash</v-icon>
+                  </v-list-tile-avatar>
+                  <v-list-tile-title>{{ $t('lb::remove') }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </td>
         </template>
       </v-data-table>
     </v-card>
@@ -83,7 +71,7 @@
 </template>
 
 <script>
-import { fetchDtRows } from '../../../utils/helpers.js';
+import { fetchDtRows, formmater } from '../../../utils/helpers.js';
 
 export default {
   name: 'users-group-page',
@@ -92,12 +80,6 @@ export default {
       loading: false,
       selected: [],
       headers: [
-        { 
-          text: "", 
-          value: 'id', 
-          sortable: false,
-          width: '50px'
-        }, 
         { 
           text: this.$t('users::group:name'), 
           value: 'name', 
@@ -118,10 +100,15 @@ export default {
         },
         { 
           text: this.$t('lb::updated_at'), 
-          class: 'text-xs-right',
           value: 'updatedAt', 
           width: '200px'
         },
+        { 
+          text: "", 
+          value: 'id', 
+          sortable: false,
+          width: '50px'
+        }, 
       ],
       pagination: {
         rowsPerPage: 25,
@@ -158,14 +145,32 @@ export default {
           this.loading = false;
         })
     },
-    removeAction(item) {
+    async removeAction(item) {
       if (this.loading) {
         return false;
       }
-    },
-    removeSelected() {
-      if (this.loading) {
-        return false;
+
+      const that = this;
+      const message = formmater(that.$t('confirm::remove_text'), item.name);
+      const confirm = await that.$root.confirmDanger(message);
+      if (confirm) {
+        that.$axios.get('users/group/remove/', {
+          params: {id: item.id}
+        })
+          .then(response => {
+            const {data} = response;
+            if (data.success) {
+              that.$snackbars.success(data.message);
+              that.refreshAction();
+            }
+          })
+          .catch(function (error) {
+            const { statusText, status } = error;
+            that.$snackbars.error('Code: ' + status + ' ' + statusText);
+          })
+          .then(() => {
+            that.loading = false;
+          });
       }
     }
   }
