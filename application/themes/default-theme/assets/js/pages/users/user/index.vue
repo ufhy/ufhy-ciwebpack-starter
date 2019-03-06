@@ -15,25 +15,15 @@
           <v-icon>la-trash</v-icon>
         </v-btn>
       </v-card-title>
-      <v-data-table :select-all="$vuetify.breakpoint.mdAndUp"
+      <v-data-table
         class="uf-datatable"
         item-key="id"
-        v-model="selected"
         :headers="headers"
         :items="items"
         :pagination.sync="pagination"
         :total-items="totalItems"
         :loading="loading">
         <template slot="items" slot-scope="props">
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <td width="30" class="pa-0">
-              <v-checkbox small hide-details
-                class="justify-center"
-                v-model="props.selected"
-                color="primary"
-              ></v-checkbox>
-            </td>
-          </template>
           <td>{{ props.item.fullName }}</td>
           <td>{{ props.item.username }}</td>
           <td>{{ props.item.email }}</td>
