@@ -27,13 +27,22 @@ class Backend_Controller extends MY_Controller
 
         // set profile user login
         if (isLoggedIn()) {
+            $isUserAdmin = isUserAdmin() ? 'true' : 'false';
+            $permissions = $this->_permissions;
+            $permissions['profile'] = ['read'];
+            if ($isUserAdmin) {
+                $permissions['dashboard'] = ['read'];
+            }
+
             ci()->template->append_metadata(
                 sprintf(
                     '<script>ufhy.USER = %s;</script>',
                     json_encode([
-                        'fullName' => $this->_currentUser->profile->full_name,
-                        'username' => $this->_currentUser->username,
-                        'email' => $this->_currentUser->email,
+                        'fullName'      => $this->_currentUser->profile->full_name,
+                        'username'      => $this->_currentUser->username,
+                        'email'         => $this->_currentUser->email,
+                        'permissions'   => $permissions,
+                        'isAdmin'       => $isUserAdmin
                     ])
                 )
             );

@@ -14,7 +14,7 @@ class Module_Settings{
             'menu' => 'settings',
             'menu_group' => 'navigation',
             'roles' => array(
-                'changes'
+                'read','changes'
             ),
         );
     }

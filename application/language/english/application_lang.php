@@ -16,6 +16,7 @@ $lang['lb::cancel'] = 'Cancel';
 $lang['lb::close'] = 'Close';
 $lang['lb::details'] = 'Details';
 $lang['lb::properties'] = 'Properties';
+$lang['lb::permissions'] = 'Permissions';
 
 $lang['msg::must_login'] = 'You must login to acces that page';
 $lang['msg::access_denied'] = 'Unable to access the page.';

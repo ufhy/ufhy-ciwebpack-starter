@@ -125,9 +125,9 @@ export default {
         .catch(error => {
           const {statusText, data} = error;
           if (typeof data.message !== "undefined") {
-            this.$snackbars.error(data.message);
+            this.$ufsnackbars.error(data.message);
           } else {
-            this.$snackbars.error(statusText);
+            this.$ufsnackbars.error(statusText);
           }
         });
     },

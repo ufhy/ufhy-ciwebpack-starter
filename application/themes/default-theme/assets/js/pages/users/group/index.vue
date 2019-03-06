@@ -47,13 +47,19 @@
                 <v-icon>la-ellipsis-v</v-icon>
               </v-btn>
               <v-list dense>
-                <v-list-tile :to="{name: 'users.group.edit', params:{id:props.item.id}}">
+                <v-list-tile v-if="$can('change_permission', 'group')" :to="{name: 'users.group.permissions', params:{id:props.item.id}}">
+                  <v-list-tile-avatar size="">
+                    <v-icon class="primary--text">la-unlock</v-icon>
+                  </v-list-tile-avatar>
+                  <v-list-tile-title>{{ $t('lb::permissions') }}</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile v-if="$can('edit', 'group')" :to="{name: 'users.group.edit', params:{id:props.item.id}}">
                   <v-list-tile-avatar size="">
                     <v-icon class="primary--text">la-edit</v-icon>
                   </v-list-tile-avatar>
                   <v-list-tile-title>{{ $t('lb::edit') }}</v-list-tile-title>
                 </v-list-tile>
-                <v-list-tile @click="removeAction(props.item)">
+                <v-list-tile v-if="$can('remove', 'group')" @click="removeAction(props.item)">
                   <v-list-tile-avatar size="">
                     <v-icon class="error--text">la-trash</v-icon>
                   </v-list-tile-avatar>
@@ -160,13 +166,13 @@ export default {
           .then(response => {
             const {data} = response;
             if (data.success) {
-              that.$snackbars.success(data.message);
+              that.$ufsnackbars.success(data.message);
               that.refreshAction();
             }
           })
           .catch(function (error) {
             const { statusText, status } = error;
-            that.$snackbars.error('Code: ' + status + ' ' + statusText);
+            that.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
           })
           .then(() => {
             that.loading = false;

@@ -25,6 +25,10 @@ Vue.use(UfSnackbars);
 import VuetifyConfirm from 'vuetify-confirm/src/index';
 Vue.use(VuetifyConfirm);
 
+import { abilitiesPlugin } from '@casl/vue';
+import ability from './utils/ability';
+Vue.use(abilitiesPlugin, ability);
+
 Vue.prototype.$axios = api();
 Vue.prototype.$lodash = _;
 

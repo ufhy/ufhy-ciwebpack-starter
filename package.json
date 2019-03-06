@@ -52,6 +52,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@casl/ability": "^3.0.1",
+    "@casl/vue": "^0.5.1",
     "axios": "^0.18.0",
     "nprogress": "^0.2.0",
     "sprintf-js": "^1.1.2",

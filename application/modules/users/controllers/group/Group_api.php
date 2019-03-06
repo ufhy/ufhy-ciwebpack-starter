@@ -131,6 +131,8 @@ class Group_api extends Api_Controller
         if ($groupIsAdmin) {
             $this->template->build_json([
                 'success' => false,
+                'groupId' => $group->id,
+                'groupName' => $group->name,
                 'isAdmin' => true,
                 'message' => lang('msg::users::group:cant_set_permission_admin')
             ]);
