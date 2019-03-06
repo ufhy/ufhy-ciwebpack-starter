@@ -16,10 +16,6 @@ application_helper.php
 * dbPrefix($table)
 * bgExec($command)
 
-bootstrap_helper.php
-* formInvalidFeedback($field)
-* formInvalid($field)
-
 
 ## Libraries added
 * Asset and Templating
