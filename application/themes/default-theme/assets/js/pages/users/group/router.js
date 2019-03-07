@@ -8,6 +8,7 @@ export default {
 	meta: {
 		title: 'menu::group',
 		breadcrumb: true,
+		shortcut: ['create', 'search', 'refresh'],
 		module: 'users/group',
 		role: 'read'
 	},

@@ -7,6 +7,7 @@ export default {
 	meta: {
 		title: 'menu::user',
 		breadcrumb: true,
+		shortcut: ['create', 'search', 'refresh'],
 		module: 'users/user',
 		role: 'read'
 	},
@@ -18,7 +19,6 @@ export default {
 			meta: {
 				title: 'users::user:heading_create',
 				breadcrumb: true,
-				shortcut: [],
 				module: 'users/user',
 				role: 'create'
 			},

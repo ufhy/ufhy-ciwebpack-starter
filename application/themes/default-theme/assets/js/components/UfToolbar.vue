@@ -59,13 +59,22 @@
 
 		<template slot="extension">
 			<div class="uf-toolbar__pagetitle">{{pageTitle}}</div>
-			<v-btn small color="blue-grey darken-4" @click="onClickNewBtn">
+			<v-btn small 
+				v-if="shortcutCreate"
+				color="blue-grey darken-4" 
+				@click="onClickCreateBtn">
 				{{$t('lb::create')}}
 			</v-btn>
-			<v-btn icon light class="ma-0">
+			<v-btn icon light 
+				v-if="shortcutSearch"
+				class="ma-0"
+				@click="onClickSearchBtn">
 				<v-icon>la-search</v-icon>
 			</v-btn>
-			<v-btn icon light class="ma-0" @click="onClickRefreshBtn">
+			<v-btn icon light 
+				v-if="shortcutRefresh"
+				class="ma-0" 
+				@click="onClickRefreshBtn">
 				<v-icon>la-refresh</v-icon>
 			</v-btn>
 
@@ -143,17 +152,44 @@ export default {
 			}
 
       return this.$route.meta.breadcrumb;
-    },
+		},
+		shortcutCreate() {
+			if (typeof this.$route.meta.shortcut !== 'undefined') {
+				if (this.$route.meta.shortcut.indexOf('create') >= 0 && this.$can('create', this.$route.meta.module)) {
+					return true
+				}
+			}
+			return false
+		},
+		shortcutRefresh() {
+			if (typeof this.$route.meta.shortcut !== 'undefined') {
+				if (this.$route.meta.shortcut.indexOf('refresh') >= 0 && this.$can('refresh', this.$route.meta.module)) {
+					return true
+				}
+			}
+			return false
+		},
+		shortcutSearch() {
+			if (typeof this.$route.meta.shortcut !== 'undefined') {
+				if (this.$route.meta.shortcut.indexOf('search') >= 0 && this.$can('search', this.$route.meta.module)) {
+					return true
+				}
+			}
+			return false
+		}
 	},
 	methods: {
 		onClickSideIcon() {
 			this.$emit('toggle-drawer');
 		},
-		onClickNewBtn() {
-			this.$root.$emit('uf-toolbar:new-action');
+		onClickCreateBtn() {
+			this.$root.$emit('uf-toolbar:create-action');
 		},
 		onClickRefreshBtn() {
 			this.$root.$emit('uf-toolbar:refresh-action');
+		},
+		onClickSearchBtn() {
+			
 		}
 	}
 }
