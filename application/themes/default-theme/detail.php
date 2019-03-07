@@ -5,9 +5,9 @@ class Theme_Default_theme
     public function init()
     {
         // this only example using google font
-        /*ci()->template->append_metadata(
-            '<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">'
-        );*/
+        ci()->template->append_metadata(
+            '<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">'
+        );
         if (ENVIRONMENT === 'development')
         {
             Asset::js('core::vue.js', true, 'vue');

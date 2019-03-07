@@ -1,6 +1,9 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-$lang['users::user:full_name'] = 'Full nama';
+$lang['users::user:heading_create'] = 'New user';
+$lang['users::user:heading_edit'] = 'Edit user';
+
+$lang['users::user:full_name'] = 'Full name';
 $lang['users::user:phone'] = 'Phone';
 $lang['users::user:email'] = 'Email';
 $lang['users::user:username'] = 'Username';

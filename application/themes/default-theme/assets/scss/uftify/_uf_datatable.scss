@@ -1,16 +1,30 @@
 .uf-datatable {
 	.v-table {
 		th {
-			font-size: 10.5px;
-			letter-spacing: .06em;
+			font-weight: 900;
+			font-size: 9px;
+			letter-spacing: .07143em;
 			text-transform: uppercase;
-
 		}
 		thead tr {
 			height: auto;
 			th {
-				padding-bottom: 8px;
-				padding-top: 16px;
+				&.column {
+					padding-bottom: 8px;
+					padding-top: 16px;
+					color: rgba(0,0,0,0.87);
+					padding-left: 12px;
+					padding-right: 12px;
+					&:first-child {
+						padding-left: 24px;
+					}
+					&:last-child {
+						padding-right: 24px;
+					}
+				}
+				&.column.sortable:hover {
+					color: rgba(0,0,0,0.54);
+				}
 				&.column.sortable.active {
 					color: $primary;
 					.v-icon {
@@ -24,11 +38,38 @@
 			}
 		}
 
-		tbody tr[active] {
-			background: #FFFDE7;
+		tbody {
+			td {
+				height: 30px;
+				&:not(:nth-child(1)) {
+					padding:0 12px;
+				}
+				&:first-child {
+					padding-left: 24px;
+				}
+				&:last-child {
+					padding-right: 24px;
+				}
+			}
+			tr[active] {
+				background: #FFFDE7!important;
+			}
+			tr:hover:not(.v-datatable__expand-row) {
+				background: #e9f0f4!important;
+			}
 		}
-		tbody tr:hover:not(.v-datatable__expand-row) {
-			background: #FFF9C4;
+	}
+
+	&.uf-datatable__striped {
+		.v-table {
+			tbody {
+				tr:not(:last-child) {
+					border-bottom: none;
+				}
+				tr:nth-child(2n) {
+					background-color: #fafafa;
+				}
+			}	
 		}
 	}
 }

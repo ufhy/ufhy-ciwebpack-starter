@@ -1,19 +1,8 @@
 <template>
-  <v-container fluid>
-    <v-card flat class="ba-solid-1 grey--border border--lighten-2 ba-round-sm">
-      <v-card-title>
-        <v-btn 
-          :to="{name: 'users.group.create'}"
-          color="primary" 
-          class="ma-0">
-          {{$t('lb::create')}}
-        </v-btn>
-        <v-btn icon flat color="primary" @click="refreshAction">
-          <v-icon>la-refresh</v-icon>
-        </v-btn>
-      </v-card-title>
+  <v-container fluid class="pa-0">
+    <v-card flat class="ba-round-0">
       <v-data-table
-        class="uf-datatable"
+        class="uf-datatable uf-datatable__striped"
         item-key="id"
         v-model="selected"
         :headers="headers"
@@ -26,6 +15,7 @@
           <td>{{ props.item.descr }}</td>
           <td>
             <v-checkbox small readonly hide-details
+              :ripple="false"
               class="justify-center"
               v-model="props.item.isDefault"
               color="primary"
@@ -33,6 +23,7 @@
           </td>
           <td>
             <v-checkbox readonly hide-details
+              :ripple="false"
               class="justify-center"
               v-model="props.item.isAdmin"
               color="primary"

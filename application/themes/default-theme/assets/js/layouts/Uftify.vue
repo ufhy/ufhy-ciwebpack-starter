@@ -3,7 +3,6 @@
     <uf-drawer v-model="drawer" :mini-drawer.sync="miniDrawer"></uf-drawer>
     <uf-toolbar :mini-drawer="miniDrawer" @toggle-drawer="toggleDrawer"></uf-toolbar>
     <v-content>
-      <uf-breadcrumb v-if="hasBreadcrumb" class="px-4 pb-0"></uf-breadcrumb>
       <router-view/>
     </v-content>
   </v-app>
@@ -12,12 +11,11 @@
 <script>
 import UfDrawer from '../components/UfDrawer.vue';
 import UfToolbar from '../components/UfToolbar.vue';
-import UfBreadcrumb from '../components/UfBreadcrumb.vue';
 
 export default {
 	name: 'uftify-layout',
 	components: {
-    UfDrawer, UfToolbar, UfBreadcrumb,
+    UfDrawer, UfToolbar,
 	},
 	data() {
     return {
@@ -25,11 +23,6 @@ export default {
       miniDrawer: true,
     }
 	},
-	computed: {
-    hasBreadcrumb() {
-      return this.$route.meta.breadcrumb;
-    },
-  },
   methods: {
     toggleDrawer() {
       this.drawer = !this.drawer;

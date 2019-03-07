@@ -13,11 +13,8 @@ class User_api extends Api_Controller
     public $_section = 'user';
 
     protected $_validationRules = [
-        ['field' => 'fullName', 'label' => 'lang:users::user:full_name', 'rules' => 'trim|required|max_length[50]'],
-        ['field' => 'nik', 'label' => 'lang:users::user:nik', 'rules' => 'trim|required|max_length[15]|callback__check_nik'],
-        ['field' => 'position', 'label' => 'lang:users::user:position', 'rules' => 'trim|required|max_length[255]|min_length[5]'],
+        ['field' => 'fullname', 'label' => 'lang:users::user:full_name', 'rules' => 'trim|required|max_length[50]'],
         ['field' => 'email', 'label' => 'lang:users::user:email', 'rules' => 'trim|required|max_length[100]|min_length[5]|callback__check_email'],
-        ['field' => 'branchId', 'label' => 'lang:users::user:branch', 'rules' => 'trim|required|callback__check_branch'],
         ['field' => 'groupId', 'label' => 'lang:users::user:group', 'rules' => 'trim|required|callback__check_group'],
     ];
 
@@ -129,6 +126,28 @@ class User_api extends Api_Controller
         return true;
     }
 
+    public function formoptions()
+    {
+        // get group options
+        $this->load->model('users/group_model');
+        $allGroups = $this->group_model->fields('id,name')
+            ->order_by('name')
+            ->get_all();
+        $groups = [];
+        if ($allGroups) {
+            foreach ($allGroups as $group) {
+                $groups[] = [
+                    'value' => $group->id,
+                    'text' => $group->name
+                ];
+            }
+        }
+
+        $this->template->build_json([
+            'groups' => $groups
+        ]);
+    }
+
     public function create()
     {
         userHasRoleOrDie('create', 'users', 'user');
@@ -141,7 +160,7 @@ class User_api extends Api_Controller
 
         $this->form_validation->set_rules($this->_validationRules);
         $this->form_validation->set_rules('password', 'lang:users::user:password', 'trim|required|min_length['.$passMinLength.']|max_length['.$passMaxLength.']');
-        $this->form_validation->set_rules('rePassword', 'lang:users::user:rePassword', 'trim|required|matches[password]');
+        $this->form_validation->set_rules('passwordConfirm', 'lang:users::user:rePassword', 'trim|required|matches[password]');
         if ($this->the_auth->getLoginIdentity() === 'username') {
             $this->form_validation->set_rules('username', 'lang:users::user:username', 'trim|required|min_length[5]|max_length[100]|callback__check_username');
         }
@@ -149,20 +168,18 @@ class User_api extends Api_Controller
         if ($this->form_validation->run())
         {
             $profile = [
-                'full_name'  => $this->input->post('fullName', TRUE),
+                'full_name'  => $this->input->post('fullname', TRUE),
                 'phone'      => $this->input->post('phone', TRUE),
-                'position'   => $this->input->post('position', TRUE),
-                'nik'        => $this->input->post('nik', TRUE),
             ];
+            $active = (bool) $this->input->post('active');
             $register = $this->the_auth->register(
                 $this->input->post('username'),
                 $this->input->post('password'),
                 $this->input->post('email'),
-                $this->input->post('branchId'),
                 $this->input->post('groupId'),
                 $profile,
                 'id',
-                $this->input->post('active')
+                $active
             );
             if ($register) {
                 Events::trigger('users::user:created', $register);
@@ -355,29 +372,6 @@ class User_api extends Api_Controller
         $this->template->build_json([
             'success' => true,
             'rows' => $groups
-        ]);
-        return true;
-    }
-
-    public function get_branch()
-    {
-        $this->load->model('reference/branch_office_model');
-        $offices = $this->branch_office_model
-            ->fields('id,name')
-            ->order_by('name', 'ASC')
-            ->as_array()
-            ->get_all(['active' => 'A']);
-        if (!$offices) {
-            $this->template->build_json([
-                'success' => false,
-                'message' => lang('msg::users::user:branch_office_empty')
-            ]);
-            return false;
-        }
-
-        $this->template->build_json([
-            'success' => true,
-            'rows' => $offices
         ]);
         return true;
     }

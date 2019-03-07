@@ -4,9 +4,9 @@
 		width="248"
 		v-model="drawer"
 		:mini-variant="miniVariant"
-		mini-variant-width="60"
+		mini-variant-width="50"
 		mobile-break-point="1024">
-		<v-toolbar flat dark height="60">
+		<v-toolbar flat dark height="45">
 			<v-toolbar-title v-if="!miniVariant">
 				<a :href="siteUrl">
 					<span class="font-weight-black white--text">{{siteTitle}}</span>
@@ -32,7 +32,7 @@
 								<v-icon>{{item.icon}}</v-icon>
 							</v-btn>
 							<v-list dense>
-								<v-subheader class="blue-grey--text text--darken-4">{{ $t(item.text) }}</v-subheader>
+								<v-subheader class="blue-grey--text text--darken-4 font-weight-bold">{{ $t(item.text) }}</v-subheader>
 								<v-list-tile
 									v-for="(children, indexChild) in item.childrens"
 									:key="index + indexChild"

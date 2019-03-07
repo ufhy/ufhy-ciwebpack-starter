@@ -1,13 +1,22 @@
 .uf-toolbar {
 	.v-toolbar__content {
-		border-bottom: 1px solid #ebebeb;
+		// border-bottom: 1px solid #ebebeb;
 	}
-}
-
-.uf-toolbar__search-input {
-	&.v-text-field.v-text-field--solo {
-		.v-input__control {
-			min-height: $uf-toolbar-height - 20px;
+	.v-toolbar__extension {
+		background-color: #F5F5F5;
+		border-bottom: 1px solid #ebebeb;
+		.uf-toolbar__pagetitle {
+			color: #263238;
+			font-weight: 900;
+			padding-right: 11px;
+			margin-right: 11px;
+			border-right: 1px dotted #616770;
+		}
+		.uf-toolbar__breadcrumb {
+			padding: 0;
+			.v-breadcrumbs__divider {
+				padding: 0 5px;
+			}
 		}
 	}
 }

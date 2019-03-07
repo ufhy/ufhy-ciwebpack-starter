@@ -18,6 +18,7 @@ export default {
 			meta: {
 				title: 'users::user:heading_create',
 				breadcrumb: true,
+				shortcut: [],
 				module: 'users/user',
 				role: 'create'
 			},

@@ -1,8 +1,9 @@
 <template>
-	<v-toolbar app flat 
-		height="60" 
-		color="white" 
-		class="uf-toolbar">
+	<v-toolbar app dark extended
+		height="45" 
+		color="primary" 
+		class="uf-toolbar elevation-0"
+		extension-height="40">
 		<v-toolbar-side-icon 
 			v-if="!$vuetify.breakpoint.mdAndUp"
 			@click="onClickSideIcon">
@@ -10,18 +11,11 @@
 		</v-toolbar-side-icon>
 		<v-toolbar-title v-if="showToolbarTitle">
 			<a :href="siteUrl">
-				<span class="font-weight-black blue--text text--darken-3">{{siteTitle}}</span>
+				<span class="font-weight-black white--text">{{siteTitle}}</span>
 			</a>
 		</v-toolbar-title>
 
 		<v-spacer v-if="showToolbarTitle"></v-spacer>
-
-		<v-text-field hide-details single-line flat
-			v-if="$vuetify.breakpoint.mdAndUp"
-			prepend-inner-icon="la-search"
-			:placeholder="$t('lb::search')"
-			class="uf-toolbar__search-input"
-		></v-text-field>
 		
 		<v-spacer></v-spacer>
 
@@ -62,6 +56,27 @@
 				</v-card>
 			</v-menu>
 		</v-toolbar-items>
+
+		<template slot="extension">
+			<div class="uf-toolbar__pagetitle">{{pageTitle}}</div>
+			<v-btn small color="blue-grey darken-4" @click="onClickNewBtn">
+				{{$t('lb::create')}}
+			</v-btn>
+			<v-btn icon light class="ma-0">
+				<v-icon>la-search</v-icon>
+			</v-btn>
+			<v-btn icon light class="ma-0" @click="onClickRefreshBtn">
+				<v-icon>la-refresh</v-icon>
+			</v-btn>
+
+			<v-spacer></v-spacer>
+			<v-breadcrumbs light 
+				v-if="hasBreadcrumb"
+				class="uf-breadcrumb uf-toolbar__breadcrumb" 
+				:items="breadcrumbs">
+				<v-icon slot="divider">la-angle-right</v-icon>
+			</v-breadcrumbs>
+		</template>
 	</v-toolbar>
 </template>
 
@@ -100,11 +115,45 @@ export default {
 		},
 		userLogin() {
 			return ufhy.USER;
-		}
+		},
+		pageTitle() {
+			return this.$t(this.$route.meta.title);
+		},
+		breadcrumbs() {
+			const that = this;
+      let breadcrumbs = [{
+				text: ufhy.SITE_TITLE_ABBR,
+				disabled: false,
+				to: '/'
+      }];
+
+      this.$route.matched.forEach(element => {
+        breadcrumbs.push({
+					text: that.$t(element.meta.title),
+					disabled: false,
+					to: element.path
+				})
+			});
+			// breadcrumbs[breadcrumbs.length - 1].disabled = true;
+      return breadcrumbs;
+		},
+		hasBreadcrumb() {
+			if (this.$vuetify.breakpoint.smAndDown) {
+				return false;
+			}
+
+      return this.$route.meta.breadcrumb;
+    },
 	},
 	methods: {
 		onClickSideIcon() {
 			this.$emit('toggle-drawer');
+		},
+		onClickNewBtn() {
+			this.$root.$emit('uf-toolbar:new-action');
+		},
+		onClickRefreshBtn() {
+			this.$root.$emit('uf-toolbar:refresh-action');
 		}
 	}
 }

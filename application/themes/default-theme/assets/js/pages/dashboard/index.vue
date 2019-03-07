@@ -1,11 +1,7 @@
 <template>
-  <main
-    id="content"
-    class="bd-masthead"
-    role="main"
-  >
+  <v-container fluid>
     
-  </main>
+  </v-container>
 </template>
 
 <script>

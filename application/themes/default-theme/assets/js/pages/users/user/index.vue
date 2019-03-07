@@ -1,22 +1,8 @@
 <template>
-  <v-container fluid>
-    <v-card flat class="ba-solid-1 grey--border border--lighten-3 ba-round-sm">
-      <v-card-title>
-        <v-btn 
-          :to="{name: 'users.user.create'}"
-          color="primary" 
-          class="ma-0">
-          {{$t('lb::create')}}
-        </v-btn>
-        <v-btn icon flat color="primary" @click="refreshAction">
-          <v-icon>la-refresh</v-icon>
-        </v-btn>
-        <v-btn icon flat color="error" class="ml-0">
-          <v-icon>la-trash</v-icon>
-        </v-btn>
-      </v-card-title>
+  <v-container fluid class="pa-0">
+    <v-card flat class="ba-round-0">
       <v-data-table
-        class="uf-datatable"
+        class="uf-datatable uf-datatable__striped"
         item-key="id"
         :headers="headers"
         :items="items"
@@ -27,15 +13,23 @@
           <td>{{ props.item.fullName }}</td>
           <td>{{ props.item.username }}</td>
           <td>{{ props.item.email }}</td>
-          <td>{{ props.item.groupName }}</td>
+          <td>
+            <v-chip>
+              <v-avatar class="primary white--text"><v-icon>la-users</v-icon></v-avatar>
+              {{ props.item.groupName }}
+            </v-chip>
+          </td>
           <td>
             <v-checkbox small readonly hide-details
+              :ripple="false"
               v-model="props.item.active"
               color="primary"
             ></v-checkbox>
           </td>
-          <td>{{ props.item.lastLogin }}</td>
-          <td>{{ props.item.updatedAt }}</td>
+          <td class="text-truncate">{{ props.item.lastLogin }}</td>
+          <td class="text-truncate">
+            {{ props.item.updatedAt }}
+          </td>
           <td>
             <v-menu offset-x>
               <v-btn icon small flat
@@ -88,13 +82,19 @@
               :label="$t('users::user:group')"
               :title="props.item.group.name"></uf-properties-item>
             <uf-properties-item :label="$t('users::user:is_admin')">
-              <v-checkbox small readonly hide-details slot="title"
+              <v-checkbox small readonly hide-details 
+                :ripple="false"
+                slot="title"
                 v-model="props.item.active"
                 color="primary"
+                height="20"
               ></v-checkbox>
             </uf-properties-item>
             <uf-properties-item :label="$t('users::user:active')">
-              <v-checkbox small readonly hide-details slot="title"
+              <v-checkbox small readonly hide-details 
+                :ripple="false"
+                slot="title"
+                height="20"
                 v-model="props.item.active"
                 color="primary"
               ></v-checkbox>
@@ -112,6 +112,8 @@
         </template>
       </template>
     </uf-sidepanel>
+
+    <router-view />
   </v-container>
 </template>
 
@@ -215,11 +217,6 @@ export default {
         return false;
       }
     },
-    removeSelected() {
-      if (this.loading) {
-        return false;
-      }
-    }
   }
 }
 </script>
