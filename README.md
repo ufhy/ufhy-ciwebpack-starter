@@ -4,6 +4,12 @@ this is starter kit for codeigniter framework and using
 * [Module Ekstensions HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc)
 * [webpack 4](https://webpack.js.org)
 * [Vue](https://vuejs.org)
+* [Vuetify](https://vuetifyjs.com)
+
+## Install
+* import database mysql from file `db/uf_ciwebpack_starter.sql`
+* create virtual host with `public` folder as `DocumentRoot`
+* user: `administrator` and pass: `qwerty`
 
 ## NPM Command
 * `npm run start` : before developing, make sure you have run the webpack dev server first
@@ -11,14 +17,13 @@ this is starter kit for codeigniter framework and using
 
 ## Helper added
 application_helper.php
-* indoDate($timestamp = '', $date_format = 'l, j F Y | H:i', $suffix = '')
-* terbilang($number, $suffix = 'rupiah')
-* dbPrefix($table)
-* bgExec($command)
-
+* indoDate($timestamp = '', $date_format = 'l, j F Y | H:i', $suffix = '') : format datetime with indonesia language
+* terbilang($number, $suffix = 'rupiah') : Currency with indonesia language
+* dbPrefix($table) : call table name with prefix
+* bgExec($command) : execute command shell in the background
 
 ## Libraries added
-* Asset and Templating
+* Asset and Templating system
 * Debugger bar
 
 ## Folder Structure
@@ -42,11 +47,9 @@ webapp/
 ```
 
 ## Requirements
-
 * PHP 5.3.7 or later
 * `composer` command (See [Composer Installation](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx))
 * [Nodejs](https://nodejs.org/en/)
-* Git
 
 ### Update CodeIgniter
 ```
