@@ -163,7 +163,7 @@ export default {
 		},
 		shortcutRefresh() {
 			if (typeof this.$route.meta.shortcut !== 'undefined') {
-				if (this.$route.meta.shortcut.indexOf('refresh') >= 0 && this.$can('refresh', this.$route.meta.module)) {
+				if (this.$route.meta.shortcut.indexOf('refresh') >= 0) {
 					return true
 				}
 			}
@@ -171,7 +171,7 @@ export default {
 		},
 		shortcutSearch() {
 			if (typeof this.$route.meta.shortcut !== 'undefined') {
-				if (this.$route.meta.shortcut.indexOf('search') >= 0 && this.$can('search', this.$route.meta.module)) {
+				if (this.$route.meta.shortcut.indexOf('search') >= 0) {
 					return true
 				}
 			}

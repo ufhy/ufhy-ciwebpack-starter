@@ -135,7 +135,7 @@ class Module_model extends MY_Model
                 {
                     $section[] = [
                         'name'  => lang($item['name']),
-                        'slug'  => $key,
+                        'slug'  => $module['slug'] .'/'. $key,
                         'roles' => isset($item['roles'])
                             ? array_map(function($value) use ($key, $module) {
                                 return [

@@ -45,13 +45,13 @@
                   <v-list-tile-title>{{ $t('lb::details') }}</v-list-tile-title>
                 </v-list-tile>
                 <v-divider />
-                <v-list-tile :to="{name: 'users.user.edit', params:{id:props.item.id}}">
+                <v-list-tile v-if="$can('edit', $route.meta.module)" :to="{name: 'users.user.edit', params:{id:props.item.id}}">
                   <v-list-tile-avatar size="">
                     <v-icon class="primary--text">la-edit</v-icon>
                   </v-list-tile-avatar>
                   <v-list-tile-title>{{ $t('lb::edit') }}</v-list-tile-title>
                 </v-list-tile>
-                <v-list-tile @click="removeAction(props.item)">
+                <v-list-tile v-if="$can('remove', $route.meta.module)" @click="removeAction(props.item)">
                   <v-list-tile-avatar size="">
                     <v-icon class="error--text">la-trash</v-icon>
                   </v-list-tile-avatar>
