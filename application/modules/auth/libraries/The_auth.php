@@ -725,11 +725,11 @@ class The_auth
         }
 
         if ($this->_ci->{$this->_userModel}->edit($userId, $userData, $profileData)) {
-            $this->setMessage('auth:user_update_successful', TRUE);
+            $this->setMessage('auth::user_update_successful', TRUE);
             return true;
         }
 
-        $this->setMessage('auth:user_update_unsuccessful', TRUE);
+        $this->setMessage('auth::user_update_unsuccessful', TRUE);
         return false;
     }
 }

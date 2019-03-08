@@ -1,5 +1,7 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
+$lang['menu::profile'] = 'Your profile';
+
 $lang['profile::full_name'] = 'Full name';
 $lang['profile::email'] = 'Email';
 $lang['profile::phone'] = 'Phone';
