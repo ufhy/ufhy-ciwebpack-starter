@@ -27,8 +27,13 @@
 				:nudge-width="200">
 				<v-btn icon 
 					slot="activator">
-					<v-avatar right size="36px">
-						<img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="Avatar">
+					<v-avatar right color="blue-grey darken-4" size="30px">
+						<template v-if="hasPhotoProfile">
+							<img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="Avatar">
+						</template>
+						<template v-else>
+							<v-icon>la-user</v-icon>
+						</template>
 					</v-avatar>
 				</v-btn>
 
@@ -37,8 +42,13 @@
 						<v-layout pa-2 column fill-height class="lightbox white--text">
 							<v-spacer></v-spacer>
 							<v-flex text-xs-center>
-								<v-avatar>
-									<img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="Avatar">
+								<v-avatar color="teal">
+									<template v-if="hasPhotoProfile">
+										<img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="Avatar">
+									</template>
+									<template v-else>
+										<v-icon class="white--text">la-user</v-icon>
+									</template>
 								</v-avatar>
 							</v-flex>
 							<v-spacer></v-spacer>
@@ -176,6 +186,9 @@ export default {
 				}
 			}
 			return false
+		},
+		hasPhotoProfile() {
+			return ufhy.USER.photo ? true : false
 		}
 	},
 	methods: {

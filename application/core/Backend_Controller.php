@@ -39,6 +39,7 @@ class Backend_Controller extends MY_Controller
                     '<script>ufhy.USER = %s;</script>',
                     json_encode([
                         'fullName'      => $this->_currentUser->profile->full_name,
+                        'photo'         => $this->_currentUser->profile->photo_file ? $this->_currentUser->profile->photo_file : '',
                         'username'      => $this->_currentUser->username,
                         'email'         => $this->_currentUser->email,
                         'permissions'   => $permissions,
