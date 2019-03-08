@@ -197,7 +197,7 @@ export default {
 			const that = this;
 			if (item.childrens) {
 				const child = item.childrens.filter((child) => {
-					return child.urlName === that.$route.name;
+					return child.url === that.$route.path;
 				});
 				if (child.length > 0) {
 					return true;
