@@ -19,7 +19,6 @@
 		
 		<v-spacer></v-spacer>
 
-		<uf-search-dialog v-if="!$vuetify.breakpoint.mdAndUp"></uf-search-dialog>
 		<v-toolbar-items>
 			<v-menu offset-x
 				v-model="userMenu"
@@ -69,18 +68,21 @@
 
 		<template slot="extension">
 			<div class="uf-toolbar__pagetitle">{{pageTitle}}</div>
+			
 			<v-btn small 
 				v-if="shortcutCreate"
 				color="blue-grey darken-4" 
 				@click="onClickCreateBtn">
 				{{$t('lb::create')}}
 			</v-btn>
-			<v-btn icon light 
-				v-if="shortcutSearch"
-				class="ma-0"
-				@click="onClickSearchBtn">
-				<v-icon>la-search</v-icon>
-			</v-btn>
+
+			<uf-search-dialog light
+				v-if="shortcutSearch" 
+				btn-class="ma-0"
+				@search-action="dialogSearchOk"
+				@search-cancel-action="dialogSearchEsc"
+			></uf-search-dialog>
+
 			<v-btn icon light 
 				v-if="shortcutRefresh"
 				class="ma-0" 
@@ -201,9 +203,12 @@ export default {
 		onClickRefreshBtn() {
 			this.$root.$emit('uf-toolbar:refresh-action');
 		},
-		onClickSearchBtn() {
-			
-		}
+		dialogSearchOk(payload) {
+			this.$root.$emit('uf-toolbar:search-action', payload);
+		},
+		dialogSearchEsc() {
+			this.$root.$emit('uf-toolbar:search-cancel-action');
+		},
 	}
 }
 </script>

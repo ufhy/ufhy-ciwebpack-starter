@@ -129,7 +129,32 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.$root.$on('uf-toolbar:create-action', this.createAction);
+    this.$root.$on('uf-toolbar:refresh-action', this.refreshAction);
+    this.$root.$on('uf-toolbar:search-action', this.searchAction);
+    this.$root.$on('uf-toolbar:search-cancel-action', this.searchClearAction);
+  },
+  destroyed() {
+    this.$root.$off('uf-toolbar:create-action', this.createAction);
+    this.$root.$off('uf-toolbar:refresh-action', this.refreshAction);
+    this.$root.$off('uf-toolbar:search-action', this.searchAction);
+    this.$root.$off('uf-toolbar:search-cancel-action', this.searchClearAction);
+  },
   methods: {
+    createAction() {
+      this.$router.push({
+        name: 'users.group.create'
+      });
+    },
+    searchAction(payload) {
+      this.searchText = payload;
+      this.refreshAction();
+    },
+    searchClearAction() {
+      this.searchText = '';
+      this.refreshAction();
+    },
     async refreshAction() {
       this.selected = [];
       this.loading = true;
