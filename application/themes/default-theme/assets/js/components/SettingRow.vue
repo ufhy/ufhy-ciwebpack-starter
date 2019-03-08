@@ -5,31 +5,35 @@
 			<v-list-tile-sub-title>{{description}}</v-list-tile-sub-title>
 		</v-list-tile-content>
 		<v-list-tile-action>
-			<v-edit-dialog lazy large
-				:return-value="value"
-				@save="editDialogSave"
-				@open="editDialogOpen"
-				@close="editDialogClose">
-				<template v-if="inputType === 'text'">
-					<div class="text-xs-right font-weight-bold">{{value}}</div>
-					<v-text-field single-line counter
-						slot="input"
-						:value="value"
-						:rules="[max255chars]"
-						label="Edit"
-					></v-text-field>
-				</template>
-				<template v-if="inputType === 'select'">
-					<div class="text-xs-right font-weight-bold">{{selectValue}}</div>
-					<v-select single-line
-						slot="input"
-						:value="value"
-						label="Edit"
-						:items="optionItems"
-					></v-select>
-				</template>
-			</v-edit-dialog>
-			
+			<template v-if="$can('changes', $route.meta.module)">
+				<v-edit-dialog lazy large
+					:return-value="value"
+					@save="editDialogSave"
+					@open="editDialogOpen"
+					@close="editDialogClose">
+					<template v-if="inputType === 'text'">
+						<div class="text-xs-right font-weight-bold">{{value}}</div>
+						<v-text-field single-line counter
+							slot="input"
+							:value="value"
+							:rules="[max255chars]"
+							label="Edit"
+						></v-text-field>
+					</template>
+					<template v-if="inputType === 'select'">
+						<div class="text-xs-right font-weight-bold">{{selectValue}}</div>
+						<v-select single-line
+							slot="input"
+							:value="value"
+							label="Edit"
+							:items="optionItems"
+						></v-select>
+					</template>
+				</v-edit-dialog>
+			</template>
+			<template v-else>
+				<div class="text-xs-right font-weight-bold">{{value}}</div>
+			</template>
 		</v-list-tile-action>
 	</v-list-tile>
 </template>
