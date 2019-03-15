@@ -3,6 +3,8 @@
 $lang['settings::section_general'] = 'General';
 $lang['settings::section_auth'] = 'Auth';
 
+$lang['settings::information'] = 'To see changes in the value you have changed, you must refresh the web application';
+
 // general sections
 $lang['settings::site_lang'] = 'Site Language';
 $lang['settings::site_lang_desc'] = '';
