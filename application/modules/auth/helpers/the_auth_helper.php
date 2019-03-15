@@ -36,7 +36,7 @@ if (!function_exists('userHasModuleSection'))
 			return true;
 		}
 
-        return isset(ci()->permissions[$module][$section]);
+        return isset(ci()->permissions[$module][sprintf('%s/%s', $module, $section)]);
     }
 }
 
@@ -55,7 +55,7 @@ if (!function_exists('userHasRole'))
 		if (empty($section)) {
             $permission = ci()->permissions[$module];
         } else {
-		    $permission = ci()->permissions[$module][$section];
+		    $permission = ci()->permissions[$module][sprintf('%s/%s', $module, $section)];
         }
 
         if (!$permission) {

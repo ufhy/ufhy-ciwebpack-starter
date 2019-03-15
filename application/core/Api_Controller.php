@@ -27,6 +27,7 @@ class Api_Controller extends MY_Controller
             'api/dashboard',
             'api/profile',
             'api/notifications',
+            'api/addons',
         ];
 
         $currentPage = $this->uri->segment(1, '') . '/' . $this->uri->segment(2, 'index');
@@ -51,10 +52,18 @@ class Api_Controller extends MY_Controller
 
             if (array_key_exists($this->_module, $this->_permissions)) {
                 $permissionSection = $this->_permissions[$this->_module];
-                if (is_array($permissionSection)) {
-                    return array_key_exists($this->_section, $permissionSection);
+                if (empty($this->_section)) {
+                    // every controler must be have "read" role
+                    $filter = array_filter($permissionSection, function($row) {
+                        return $row === 'read';
+                    });
+                    return count($filter) > 0;
                 }
-                return $permissionSection;
+                else if (is_array($permissionSection)) {
+                    return userHasModuleSection($this->_module, $this->_section);
+                }
+
+                return false;
             }
         }
 
