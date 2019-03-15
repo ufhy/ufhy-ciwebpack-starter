@@ -5,7 +5,7 @@
 			<v-list-tile-sub-title>{{description}}</v-list-tile-sub-title>
 		</v-list-tile-content>
 		<v-list-tile-action>
-			<template v-if="$can('changes', $route.meta.module)">
+			<template v-if="editable">
 				<v-edit-dialog lazy large
 					:return-value="value"
 					@save="editDialogSave"
@@ -43,7 +43,7 @@ export default {
 	props: {
 		editable: {
 			type: Boolean,
-			default: true,
+			default: false,
 		},
 		title: String,
 		description: String,
