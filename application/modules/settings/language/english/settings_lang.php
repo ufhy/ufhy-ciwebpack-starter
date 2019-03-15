@@ -40,3 +40,7 @@ $lang['settings::auth_store_salt'] = 'Store Salt';
 $lang['settings::auth_store_salt_desc'] = '';
 $lang['settings::auth_store_salt_length'] = 'Store Salt Length';
 $lang['settings::auth_store_salt_length_desc'] = '';
+$lang['settings::date_long'] = 'Format Long Date';
+$lang['settings::date_long_desc'] = '';
+$lang['settings::date_short'] = 'Format Short Date';
+$lang['settings::date_short_desc'] = '';
