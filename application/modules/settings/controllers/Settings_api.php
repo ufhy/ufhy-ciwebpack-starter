@@ -79,4 +79,40 @@ class Settings_api extends Api_Controller
             'data' => compact('sections', 'dataSection')
         ]);
     }
+
+    public function savechanges()
+    {
+        userHasRoleOrDie('changes', 'settings');
+
+        $this->load->library('form_validation');
+        $this->form_validation->CI =& $this;
+
+        $this->form_validation->set_rules('slug', 'Slug', 'trim|required');
+        $this->form_validation->set_rules('value', 'Value', 'trim|required');
+        if ($this->form_validation->run())
+        {
+            $slug = $this->input->post('slug', TRUE);
+            $value = $this->input->post('value', TRUE);
+            $result = Setting::saveChange($slug, $value);
+            if ($result) {
+                Events::trigger('settings::changed', $result);
+                $this->template->build_json([
+                    'success' => true,
+                    'message' => lang('msg::saving_success')
+                ]);
+            } else {
+                $this->template->build_json([
+                    'success' => false,
+                    'message' => lang('msg::saving_failed')
+                ]);
+            }
+        }
+        else {
+            $this->output->set_status_header('400', lang('msg::saving_failed'));
+            $this->template->build_json([
+                'success' => false,
+                'message' => $this->form_validation->error_array()
+            ]);
+        }
+    }
 }

@@ -9,13 +9,12 @@
 				<v-edit-dialog lazy large
 					:return-value="value"
 					@save="editDialogSave"
-					@open="editDialogOpen"
-					@close="editDialogClose">
+					@open="editDialogOpen">
 					<template v-if="inputType === 'text'">
 						<div class="text-xs-right font-weight-bold">{{value}}</div>
 						<v-text-field single-line counter
 							slot="input"
-							:value="value"
+							v-model="inputValue"
 							:rules="[max255chars]"
 							label="Edit"
 						></v-text-field>
@@ -24,7 +23,7 @@
 						<div class="text-xs-right font-weight-bold">{{selectValue}}</div>
 						<v-select single-line
 							slot="input"
-							:value="value"
+							v-model="inputValue"
 							label="Edit"
 							:items="optionItems"
 						></v-select>
@@ -58,6 +57,7 @@ export default {
 	data() {
 		return {
 			max255chars: v => v.length <= 255 || 'Input too long!',
+			inputValue: '',
 		}
 	},
 	computed: {
@@ -90,13 +90,12 @@ export default {
 	},
 	methods: {
 		editDialogOpen() {
-			console.log('editDialogOpen');
-		},
-		editDialogClose() {
-			console.log('editDialogClose');
+			this.inputValue = this.value;
 		},
 		editDialogSave() {
-			console.log('editDialogSave');
+			if (this.inputValue !== this.value) {
+				this.$emit('save', this.inputValue);
+			}
 		}
 	}
 }

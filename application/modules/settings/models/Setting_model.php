@@ -3,8 +3,10 @@
 class Setting_model extends MY_Model
 {
     public $table = 'settings';
-
     public $primary_key = 'slug';
+    public $fillable = [
+        'value'
+    ];
 
     public function __construct()
     {

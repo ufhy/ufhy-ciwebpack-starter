@@ -21,6 +21,7 @@
                   :value="dataSection.value ? dataSection.value : dataSection.default"
                   :input-type="dataSection.type"
                   :input-options="dataSection.options"
+                  @save="onSave(dataSection.slug, $event)"
                 ></setting-row>
                 <v-divider v-if="dataSections[index].length > indexData + 1" :key="section + '_divider_' + indexData" />
               </template>
@@ -66,6 +67,37 @@ export default {
           that.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
         });
     },
+    onSave(slug, payload) {
+      if (this.loading) {
+        return false;
+      }
+
+      if (!slug) {
+        return false;
+      }
+
+      this.loading = true;
+      const item = new FormData();
+      item.set('slug', slug);
+      item.set('value', payload);
+
+      this.$axios.post('settings/savechanges', item)
+        .then((response) => {
+          const { data } = response;
+          this.$ufsnackbars.show(data.message, {type: data.success ? 'success' : 'error'});
+
+          if (data.success) {
+            this.fetchItem();
+          }
+        })
+        .catch((error) => {
+          const {statusText, data} = error;
+          this.$ufsnackbars.error(statusText);
+        })
+        .then(() => {
+          this.loading = false;
+        }) 
+    }
   }
 }
 </script>

@@ -16,6 +16,9 @@ class Module_Settings{
             'roles' => array(
                 'read','changes'
             ),
+            'events' => [
+                'settings::changed'
+            ]
         );
     }
 

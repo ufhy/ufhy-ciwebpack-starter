@@ -34,4 +34,18 @@ class Setting
 
         return $value;
     }
+
+    public static function saveChange($slug, $value)
+    {
+        $setting = ci()->setting_model->get(['slug' => $slug]);
+        if (!$setting) {
+            return false;
+        }
+
+        $update = ci()->setting_model->update(
+            ['value' => $value], ['slug' => $slug]
+        );
+
+        return $update;
+    }
 }
