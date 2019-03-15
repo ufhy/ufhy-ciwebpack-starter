@@ -1,5 +1,14 @@
 <template>
   <v-container>
+    <v-alert dismissible 
+      v-if="$can('changes', $route.meta.module)"
+      :value="true" 
+      color="light-blue lighten-4" 
+      class="mb-3">
+      <span class="light-blue--text text--darken-4">
+        {{$t('settings::information')}}
+      </span>
+    </v-alert>
     <v-card flat class="ba-solid-1 grey--border border--lighten-2 ba-round-sm pa-0">
       <v-tabs centered
         slider-color="primary"
@@ -15,6 +24,7 @@
             <v-list two-line>
               <template v-for="(dataSection, indexData) in dataSections[index]">
                 <setting-row 
+                  :editable="$can('changes', $route.meta.module)"
                   :key="section + '_' + indexData"
                   :title="dataSection.title"
                   :description="dataSection.description"
