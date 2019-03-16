@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const glob = require('glob');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -25,7 +24,7 @@ const config = merge(common, {
     new webpack.DefinePlugin({
       "ENV": JSON.stringify("production")
     }),
-  ]
+  ],
 });
 
 module.exports = config;
