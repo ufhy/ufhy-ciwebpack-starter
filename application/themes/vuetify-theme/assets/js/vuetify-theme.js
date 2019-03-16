@@ -10,7 +10,7 @@ import router from './router';
 import store from './store';
 import api from './utils/api';
 import Uftify from './layouts/Uftify.vue'
-import '../scss/default-theme.scss';
+import '../scss/vuetify-theme.scss';
 
 import vuexI18n from 'vuex-i18n';
 Vue.use(vuexI18n.plugin, store, {

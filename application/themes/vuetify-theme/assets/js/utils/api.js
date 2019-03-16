@@ -17,11 +17,12 @@ export default () => {
     const { status, statusText } = error.response;
     if (status === 405) {
       VUE.$router.push({
-        name: 'dashboard'
+        name: 'dashboard.index'
       });
-      VUE.$toasted.error('Please refresh your browser!');
+      VUE.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
+      // VUE.$toasted.error('Please refresh your browser!');
     } else if (status === 403) {
-      window.location.href = ufhy.SITE_URL + '/auth/logout';
+      window.location.href = ufhy.SITE_URL;
     }
 
     return Promise.reject(error.response);

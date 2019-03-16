@@ -15,7 +15,9 @@
           <td>{{ props.item.email }}</td>
           <td>
             <v-chip>
-              <v-avatar class="primary white--text"><v-icon>la-users</v-icon></v-avatar>
+              <v-avatar class="primary">
+                <v-icon dark class="white--text">la-users</v-icon>
+              </v-avatar>
               {{ props.item.groupName }}
             </v-chip>
           </td>
@@ -85,7 +87,7 @@
               <v-checkbox small readonly hide-details 
                 :ripple="false"
                 slot="title"
-                v-model="props.item.active"
+                v-model="props.item.group.isAdmin"
                 color="primary"
                 height="20"
               ></v-checkbox>
@@ -193,7 +195,32 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.$root.$on('uf-toolbar:create-action', this.createAction);
+    this.$root.$on('uf-toolbar:refresh-action', this.refreshAction);
+    this.$root.$on('uf-toolbar:search-action', this.searchAction);
+    this.$root.$on('uf-toolbar:search-cancel-action', this.searchClearAction);
+  },
+  destroyed() {
+    this.$root.$off('uf-toolbar:create-action', this.createAction);
+    this.$root.$off('uf-toolbar:refresh-action', this.refreshAction);
+    this.$root.$off('uf-toolbar:search-action', this.searchAction);
+    this.$root.$off('uf-toolbar:search-cancel-action', this.searchClearAction);
+  },
   methods: {
+    createAction() {
+      this.$router.push({
+        name: 'users.user.create'
+      });
+    },
+    searchAction(payload) {
+      this.searchText = payload;
+      this.refreshAction();
+    },
+    searchClearAction() {
+      this.searchText = '';
+      this.refreshAction();
+    },
     showDetail(item) {
       this.sidePanelParams = {
         id: item.id

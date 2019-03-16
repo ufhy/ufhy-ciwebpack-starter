@@ -6,6 +6,7 @@ import api from '../utils/api';
 import 'nprogress/nprogress.css';
 
 import paths from './paths';
+import ability from '../utils/ability.js';
 
 Vue.use(Router);
 
@@ -34,8 +35,19 @@ const loadI18n = async (module) => {
 
 const beforeEach = async (to, from, next) => {
   NProgress.start();
-  await loadI18n(to.meta.module);
-  next();
+  if (to.name === 'error_page.permission.index') {
+    next();
+  }
+  else {
+    if (!ability.can(to.meta.role, to.meta.module)) {
+      next({
+        path: '/error/permission'
+      });
+    } else {
+      await loadI18n(to.meta.module);
+      next();
+    }
+  }
 }
 
 const afterEach = (to, from) => {

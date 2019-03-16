@@ -74,7 +74,7 @@ export default {
         })
         .catch(error => {
           const { statusText, status } = error;
-          that.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
+          this.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
         });
     },
     onSave(slug, payload) {

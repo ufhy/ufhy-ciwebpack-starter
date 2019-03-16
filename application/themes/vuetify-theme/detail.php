@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Theme_Default_theme
+class Theme_Vuetify_theme
 {
     public function init()
     {
@@ -53,7 +53,7 @@ class Theme_Default_theme
             )
         );
 
-        Asset::js('webpack::dist/default-theme.js', true, 'webpack-bundle');
-        Asset::css('webpack::dist/default-theme.css', true, 'webpack-bundle');
+        Asset::js('webpack::dist/vuetify-theme.js', true, 'webpack-bundle');
+        Asset::css('webpack::dist/vuetify-theme.css', true, 'webpack-bundle');
     }
 }
