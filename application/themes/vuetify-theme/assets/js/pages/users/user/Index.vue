@@ -28,9 +28,11 @@
               color="primary"
             ></v-checkbox>
           </td>
-          <td class="text-truncate">{{ props.item.lastLogin }}</td>
           <td class="text-truncate">
-            {{ props.item.updatedAt }}
+            {{ $root.dateLong(props.item.updatedAt) }}
+          </td>
+          <td class="text-truncate">
+            {{ $root.dateShort(props.item.updatedAt) }}
           </td>
           <td>
             <v-menu offset-x>
@@ -103,13 +105,13 @@
             </uf-properties-item>
             <uf-properties-item
               :label="$t('users::user:last_login')"
-              :title="props.item.lastLogin"></uf-properties-item>
+              :title="$root.dateLong(props.item.lastLogin)"></uf-properties-item>
             <uf-properties-item
               :label="$t('lb::created_at')"
-              :title="props.item.createdAt"></uf-properties-item>
+              :title="$root.dateShort(props.item.createdAt)"></uf-properties-item>
             <uf-properties-item
               :label="$t('lb::updated_at')"
-              :title="props.item.updatedAt"></uf-properties-item>
+              :title="$root.dateShort(props.item.updatedAt)"></uf-properties-item>
           </uf-properties>
         </template>
       </template>

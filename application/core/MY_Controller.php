@@ -64,10 +64,21 @@ class MY_Controller extends MX_Controller
 
         $ufhy['site_name_full'] = $this->template->siteNameFull = Setting::get('site_name_full');
         $ufhy['site_name_abbr'] = $this->template->siteNameAbbr = Setting::get('site_name_abbr');
+        $ufhy['date_long_fmt'] = $this->template->dateLongFmt = Setting::get('date_long');
+        $ufhy['date_short_fmt'] = $this->template->dateShortFmt = Setting::get('date_short');
         
         // set global variable for javascript
         ci()->template->append_metadata(
             '<script>if (typeof(ufhy) === "undefined") { var ufhy = {}; }</script>'
+        );
+
+        // adding format date to js variable (using momentjs formate)
+        ci()->template->append_metadata(
+            sprintf(
+                '<script>ufhy.DATE = {formatLong: "%s", formatShort: "%s"}</script>',
+                formatDateToMomentFormat($ufhy['date_long_fmt']),
+                formatDateToMomentFormat($ufhy['date_short_fmt'])
+            )
         );
         ci()->template->append_metadata(
             sprintf(

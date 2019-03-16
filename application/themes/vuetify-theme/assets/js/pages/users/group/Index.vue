@@ -29,7 +29,9 @@
               color="primary"
             ></v-checkbox>
           </td>
-          <td>{{ props.item.updatedAt }}</td>
+          <td class="text-truncate">
+            {{ $root.dateShort(props.item.updatedAt) }}
+          </td>
           <td>
             <v-menu offset-y>
               <v-btn icon small flat

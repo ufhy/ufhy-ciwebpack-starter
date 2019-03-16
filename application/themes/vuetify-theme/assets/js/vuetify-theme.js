@@ -5,6 +5,7 @@ if (ENV === 'production') {
 
 import Vue from 'vue';
 import _ from 'lodash';
+import moment from 'moment';
 
 import router from './router';
 import store from './store';
@@ -31,6 +32,7 @@ Vue.use(abilitiesPlugin, ability);
 
 Vue.prototype.$axios = api();
 Vue.prototype.$lodash = _;
+Vue.prototype.$moment = moment;
 
 window.VUE = new Vue({
   router,
@@ -77,6 +79,12 @@ window.VUE = new Vue({
           resolve(res);
         })
       });
+    },
+    dateLong(value) {
+      return moment(value).format(ufhy.DATE.formatLong);
+    },
+    dateShort(value) {
+      return moment(value).format(ufhy.DATE.formatShort);
     }
   },
   render: h => h(Uftify)
