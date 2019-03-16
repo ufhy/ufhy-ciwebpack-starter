@@ -23,7 +23,6 @@ window.VUE = new Vue({
   methods: {
     reThemeVuetify() {
       //color
-      console.log(this.$vuetify);
       this.$vuetify.theme.accent = "#1565C0";
       this.$vuetify.theme.error = "#FF5252";
       this.$vuetify.theme.info = "#2196F3";
