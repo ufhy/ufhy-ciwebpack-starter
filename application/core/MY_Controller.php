@@ -22,7 +22,7 @@
  */
 class MY_Controller extends MX_Controller
 {
-    public $_themeName = 'default-theme';
+    public $_themeName = 'vuetify-theme';
 
     protected $_currentUser = null;
     protected $_permissions = null;
