@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 10240,
           mimetype: 'application/font-woff'
@@ -78,7 +78,7 @@ module.exports = {
       },
       {
         test: /\.woff?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 100000,
           mimetype: 'application/font-woff'
@@ -86,7 +86,7 @@ module.exports = {
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 10240,
           mimetype: 'application/octet-stream'
@@ -94,11 +94,11 @@ module.exports = {
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader'
+        loader: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 10240,
           mimetype: 'image/svg+xml'
@@ -117,6 +117,7 @@ module.exports = {
     new VueLoaderPlugin(),
   ],
   externals: {
-    "vue": "Vue"
+    "vue": "Vue",
+    "vuetify": "Vuetify"
   }
 };
