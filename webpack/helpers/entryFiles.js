@@ -4,7 +4,7 @@ const splitString = require('./splitString');
 
 const appPath = path.join(__dirname, '../../application');
 const pathEntries = [
-	path.resolve(appPath, 'themes/default-theme/assets/js/*.js'),
+	path.resolve(appPath, 'themes/vuetify-theme/assets/js/*.js'),
 	path.resolve(appPath, 'themes/auth-theme/assets/js/*.js'),
 ];
 
