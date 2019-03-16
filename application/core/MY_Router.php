@@ -12,8 +12,8 @@ class MY_Router extends MX_Router
 
         // only for test
         // sometime js file has map file but not found in server
-        if (ENVIRONMENT !== 'testing') {
-            log_message('debug', json_encode($uri));
+        if (ENVIRONMENT === 'development') {
+            log_message('error', json_encode($uri));
         }
 
         // Get HTTP verb
