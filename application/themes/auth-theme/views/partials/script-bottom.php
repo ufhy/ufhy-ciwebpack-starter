@@ -1,6 +1,7 @@
 <?php
 
 echo Asset::render_js('vue');
+echo Asset::render_js('vuetify');
 echo Asset::render_js('webpack-vendors');
 
 if (ENVIRONMENT === 'development') {

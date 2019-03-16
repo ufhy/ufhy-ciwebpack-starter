@@ -21,7 +21,7 @@
               </h5>
               <p class="text-center"><?php echo lang('auth::description'); ?></p>
 
-              <v-text-field autofocus solo flat
+              <v-text-field autofocus solo
                 autocomplete="false"
                 label="<?php echo lang('auth::identity'); ?>"
                 name="user_login"
@@ -29,7 +29,7 @@
                 prepend-inner-icon="la-user"
               ></v-text-field>
 
-              <v-text-field autofocus solo flat
+              <v-text-field autofocus solo
                 type="password"
                 label="<?php echo lang('auth::password'); ?>"
                 name="user_password"

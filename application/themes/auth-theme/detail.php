@@ -7,6 +7,7 @@ class Theme_Auth_theme
         if (ENVIRONMENT === 'development')
         {
             Asset::js('core::vue.js', true, 'vue');
+            Asset::js('core::vuetify.js', true, 'vuetify');
 
             Asset::add_path('webpack', [
                 'path' => 'http://localhost:9000',
@@ -30,9 +31,10 @@ class Theme_Auth_theme
             ]);
 
             Asset::js('core::vue.min.js', true, 'vue');
+            Asset::js('core::vuetify.min.js', true, 'vuetify');
         }
 
-        Asset::js('webpack::dist/vuetify.js', true, 'webpack-vendors');
+        // Asset::js('webpack::dist/vuetify.js', true, 'webpack-vendors');
         Asset::css('webpack::dist/vuetify.css', true, 'webpack-vendors');
         Asset::css('webpack::dist/line-awesome.css', true, 'webpack-vendors');
 
