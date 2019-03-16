@@ -11,7 +11,7 @@
  Target Server Version : 50628
  File Encoding         : 65001
 
- Date: 08/03/2019 14:45:49
+ Date: 16/03/2019 18:17:46
 */
 
 SET NAMES utf8mb4;
@@ -112,7 +112,7 @@ CREATE TABLE `uf_settings`  (
 -- ----------------------------
 -- Records of uf_settings
 -- ----------------------------
-INSERT INTO `uf_settings` VALUES ('auth_email_activation', 'Email Activation', NULL, '1', NULL, 'auth', 'select', 0, '0=Disable|1=Enable', 1, NULL, '2018-09-22 11:04:50', '2018-09-22 11:04:53');
+INSERT INTO `uf_settings` VALUES ('auth_email_activation', 'Email Activation', NULL, '1', '0', 'auth', 'select', 0, '0=Disable|1=Enable', 1, NULL, '2018-09-22 11:04:50', '2019-03-16 17:55:17');
 INSERT INTO `uf_settings` VALUES ('auth_extend_on_login', 'Extend on login', 'Extend the users cookies every time they auto-login', '0', NULL, 'auth', 'select', 1, '0=Disable|1=Enable', 1, NULL, '2018-09-24 17:17:46', '2018-09-24 17:17:50');
 INSERT INTO `uf_settings` VALUES ('auth_identity_cookie', 'Cookie Identity', 'Cookie name of identity', 'identity_cookie', NULL, 'auth', 'text', 1, NULL, 1, NULL, '2018-09-23 17:00:29', '2018-09-23 17:00:29');
 INSERT INTO `uf_settings` VALUES ('auth_login_identity', 'Login identity', NULL, 'username', NULL, 'auth', 'select', 0, 'username=username|email=email', 1, NULL, '2018-09-23 14:39:31', '2018-09-23 17:18:12');
@@ -125,7 +125,9 @@ INSERT INTO `uf_settings` VALUES ('auth_remember_me_cookie', 'Cookie Remember me
 INSERT INTO `uf_settings` VALUES ('auth_remember_me_expire', 'Expire remember me', 'How long to remember the user (seconds). Set to zero for no expiration', '86500', NULL, 'auth', 'text', 1, NULL, 1, NULL, '2018-09-23 16:54:18', '2018-09-23 16:56:50');
 INSERT INTO `uf_settings` VALUES ('auth_store_salt', 'Store Salt', NULL, '1', NULL, 'auth', 'select', 0, '0=Disable|1=Enable', 1, NULL, '2018-09-22 11:02:58', '2018-09-22 11:03:00');
 INSERT INTO `uf_settings` VALUES ('auth_store_salt_length', 'Store Salt Length', NULL, '13', NULL, 'auth', 'text', 0, NULL, 1, NULL, '2018-09-22 11:03:55', '2018-09-23 20:57:48');
-INSERT INTO `uf_settings` VALUES ('files_cache', 'Files Cache', 'When outputting an image via site.com/files what shall we set the cache expiration for?', '480', '1', 'files', 'select', 0, '0=no-cache|1=1-minute|60=1-hour|180=3-hour|480=8-hour|1440=1-day|43200=30-days', 1, NULL, '2018-10-30 13:59:37', '2018-10-30 13:59:37');
+INSERT INTO `uf_settings` VALUES ('date_long', 'Format Long Date', NULL, 'Y-m-d H:i:s', 'd/m/Y H:i:s', NULL, 'text', 1, NULL, 1, NULL, '2019-03-15 20:03:14', '2019-03-15 20:42:00');
+INSERT INTO `uf_settings` VALUES ('date_short', 'Format Short Date', NULL, 'Y-m-d', 'd/m/Y', NULL, 'text', 1, NULL, 1, NULL, '2019-03-15 20:04:12', '2019-03-15 20:04:12');
+INSERT INTO `uf_settings` VALUES ('files_cache', 'Files Cache', 'When outputting an image via site.com/files what shall we set the cache expiration for?', '480', '1440', 'files', 'select', 0, '0=no-cache|1=1-minute|60=1-hour|180=3-hour|480=8-hour|1440=1-day|43200=30-days', 1, NULL, '2018-10-30 13:59:37', '2019-03-15 20:42:26');
 INSERT INTO `uf_settings` VALUES ('files_upload_limit', 'Filesize Limit', 'Maximum filesize to allow when uploading. Specify the size in MB. Example: 5', '5', NULL, 'files', 'text', 0, NULL, 1, NULL, '2018-10-28 21:47:41', '2018-10-28 21:47:41');
 INSERT INTO `uf_settings` VALUES ('site_lang', 'Site Language', NULL, 'en', NULL, NULL, 'select', 1, 'en=English', 1, NULL, '2018-09-24 19:52:17', '2018-09-24 19:52:17');
 INSERT INTO `uf_settings` VALUES ('site_name_abbr', 'Site Abbr Name', NULL, 'ciwebpack', 'uftify', NULL, 'text', 1, NULL, 1, NULL, '2018-09-24 00:31:37', '2019-02-23 11:47:30');
@@ -173,14 +175,14 @@ CREATE TABLE `uf_user_groups_permissions`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `group_id`(`group_id`) USING BTREE,
   CONSTRAINT `uf_user_groups_permissions_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `uf_user_groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of uf_user_groups_permissions
 -- ----------------------------
-INSERT INTO `uf_user_groups_permissions` VALUES (9, 5, 'settings', '[\"read\"]', '2019-03-06 20:36:22', 1, '2019-03-06 20:36:22', 1);
-INSERT INTO `uf_user_groups_permissions` VALUES (10, 5, 'users', '{\"user\":[\"read\"],\"group\":[\"read\"]}', '2019-03-06 20:36:22', 1, '2019-03-06 20:36:22', 1);
-INSERT INTO `uf_user_groups_permissions` VALUES (11, 5, 'dashboard', '[\"read\"]', '2019-03-06 20:36:22', 1, '2019-03-06 20:36:22', 1);
+INSERT INTO `uf_user_groups_permissions` VALUES (23, 5, 'settings', '[\"read\"]', '2019-03-15 21:46:15', 1, '2019-03-15 21:46:15', 1);
+INSERT INTO `uf_user_groups_permissions` VALUES (24, 5, 'users', '{\"users\\/user\":[\"read\"],\"users\\/group\":[\"read\"]}', '2019-03-15 21:46:15', 1, '2019-03-15 21:46:15', 1);
+INSERT INTO `uf_user_groups_permissions` VALUES (25, 5, 'dashboard', '[\"read\"]', '2019-03-15 21:46:15', 1, '2019-03-15 21:46:15', 1);
 
 -- ----------------------------
 -- Table structure for uf_user_login_attempts
@@ -212,7 +214,7 @@ CREATE TABLE `uf_user_profile`  (
 -- Records of uf_user_profile
 -- ----------------------------
 INSERT INTO `uf_user_profile` VALUES (1, 'Administrator', '-', NULL, '2019-02-23 17:33:40');
-INSERT INTO `uf_user_profile` VALUES (2, 'Suryadi ufhy', '08114602715', NULL, '2019-03-07 11:24:32');
+INSERT INTO `uf_user_profile` VALUES (2, 'Suryadi', '-', NULL, '2019-03-15 20:50:39');
 
 -- ----------------------------
 -- Table structure for uf_user_users
@@ -242,7 +244,7 @@ CREATE TABLE `uf_user_users`  (
 -- ----------------------------
 -- Records of uf_user_users
 -- ----------------------------
-INSERT INTO `uf_user_users` VALUES (1, '1', 'administrator', '$2y$10$i5MLkTSL7x6rDeSVx4VGkuqpkr5aACNLcs.OSQRZhw.UDWvOdpsNa', '0HTL/tcYiJI11', 'cms_admin@localhost', '', NULL, NULL, 'K8Fp0gUI.705M', 1, 'en', 1, '2019-03-08 13:52:48', '2017-05-25 00:19:50', '2019-03-08 14:44:50', NULL);
-INSERT INTO `uf_user_users` VALUES (2, '::1', 'suryadi', '$2y$10$eMlbyt.z0ChnNg2fC1qCmeTXVrv7MPe6IaVPxQQfbDNeSENhyLkeS', 'XhbIYMUtSl2l3', 'suryadi@localhost.test', NULL, NULL, NULL, NULL, 1, 'id', 5, NULL, '2019-03-07 11:24:32', '2019-03-07 11:24:32', NULL);
+INSERT INTO `uf_user_users` VALUES (1, '1', 'administrator', '$2y$10$i5MLkTSL7x6rDeSVx4VGkuqpkr5aACNLcs.OSQRZhw.UDWvOdpsNa', '0HTL/tcYiJI11', 'cms_admin@localhost', '', NULL, NULL, 'JMNNovVRUzodA', 1, 'en', 1, '2019-03-16 18:06:57', '2017-05-25 00:19:50', '2019-03-16 18:06:57', NULL);
+INSERT INTO `uf_user_users` VALUES (2, '::1', 'suryadi', '$2y$10$HqtaNHay3j075dgsj1tBMuI.sr038rWKbVOM7M7zvEcqnZ5T..yiK', '8keRgRP9750Xw', 'suryadi@localhost.test', NULL, NULL, NULL, NULL, 1, 'id', 5, '2019-03-15 21:05:00', '2019-03-15 20:50:39', '2019-03-15 21:05:00', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
