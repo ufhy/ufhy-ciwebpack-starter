@@ -236,7 +236,7 @@ class User_api extends Api_Controller
 
             $result = $this->the_auth->updateUser($this->input->post('id', TRUE), $userData, $profileData);
             if ($result) {
-                Events::trigger('users::group:edited', $this->input->post('id', TRUE));
+                Events::trigger('users::user:edited', $this->input->post('id', TRUE));
                 $this->template->build_json([
                     'success' => true,
                     'message' => lang('msg::saving_success')
@@ -338,6 +338,7 @@ class User_api extends Api_Controller
 
         $remove = $this->the_auth->deleteUser($id);
         if (!$remove) {
+            Events::trigger('users::user:removed', $this->input->get('id', TRUE));
             $this->template->build_json([
                 'success' => false,
                 'message' => $this->the_auth->getErrorStr()

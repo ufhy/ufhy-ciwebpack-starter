@@ -20,6 +20,9 @@ class Module_Users {
                     'roles' => [
                         'read','create', 'edit', 'remove','change_password'
                     ],
+                    'event' => [
+                        'users::user:created','users::user:edited','users::user:removed'
+                    ]
                 ),
                 'group' => array(
                     'name' => 'menu::group',
@@ -27,6 +30,10 @@ class Module_Users {
                     'roles' => [
                         'read','create', 'edit', 'remove', 'change_permission'
                     ],
+                    'events' => [
+                        'users::group:permission_changed','users::group:created',
+                        'users::group:edited','users::group:removed'
+                    ]
                 ),
             )
         );

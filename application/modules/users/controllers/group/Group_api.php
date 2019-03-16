@@ -268,6 +268,7 @@ class Group_api extends Api_Controller
         $remove = $this->group_model
             ->delete(['id' => $this->input->get('id', TRUE)]);
         if (!$remove) {
+            Events::trigger('users::group:removed', $this->input->get('id', TRUE));
             $this->template->build_json([
                 'success' => false,
                 'message' => lang('msg::delete_failed')
