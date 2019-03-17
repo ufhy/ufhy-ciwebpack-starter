@@ -19,7 +19,7 @@
 		</v-toolbar>
 		
 		<template v-if="miniVariant">
-			<div class="uf-drawer__mini-content pt-3">
+			<div class="uf-drawer__mini-content" style="padding-top: 40px">
 				<template v-for="(item, index) in menuItems">
 					<template v-if="item.childrens">
 						<v-menu offset-x full-width

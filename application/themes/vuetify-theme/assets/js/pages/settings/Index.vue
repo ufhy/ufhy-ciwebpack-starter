@@ -21,7 +21,7 @@
         <v-tab-item v-for="(section, index) in sections"
           :key="index">
           <template v-if="dataSections[index]">
-            <v-list two-line>
+            <v-list two-line dense>
               <template v-for="(dataSection, indexData) in dataSections[index]">
                 <setting-row 
                   :editable="$can('changes', $route.meta.module)"
