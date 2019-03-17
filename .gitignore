@@ -15,6 +15,9 @@ application/logs/*
 public/dist/*
 !public/dist/index.html
 
+uploads/files/*
+!uploads/files/index.html
+
 
 composer.lock
 package-lock.json
