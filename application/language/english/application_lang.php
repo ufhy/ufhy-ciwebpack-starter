@@ -2,6 +2,7 @@
 
 $lang['label::id'] = 'ID';
 $lang['lb::profile'] = 'Profile';
+$lang['lb::name'] = 'Name';
 $lang['lb::logout'] = 'Logout';
 $lang['lb::search'] = 'Search';
 $lang['lb::status'] = 'Status';
