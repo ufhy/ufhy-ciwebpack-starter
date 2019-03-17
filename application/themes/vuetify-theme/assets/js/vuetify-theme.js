@@ -64,6 +64,8 @@ window.VUE = new Vue({
       this.$vuetify.icons.success = "la-check-circle";
       this.$vuetify.icons.cancel = "la-times-circle";
       this.$vuetify.icons.close = "la-times-circle";
+      this.$vuetify.icons.subgroup = "la-angle-down";
+      this.$vuetify.icons.loading = "la-spinner";
     },
     confirmDanger(message) {
       const that = this;
