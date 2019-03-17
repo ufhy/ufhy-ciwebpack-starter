@@ -20,7 +20,7 @@ class Files extends MY_Controller
 
     public  function index() {}
 
-    public function thumb($id = 0, $width = 100, $height = 100, $mode = null)
+    public function thumb($id = 0, $width = 150, $height = 150, $mode = null)
     {
         $file = new stdClass();
         if ((strlen($id) === 15 and strpos($id, '.') === false) or (is_numeric($id) and strpos($id, '.') === false))

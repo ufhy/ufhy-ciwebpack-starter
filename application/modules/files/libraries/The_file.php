@@ -146,14 +146,23 @@ class The_file
         $allFolder = ci()->folder_model
             ->order_by('name', 'asc')->as_array()->get_all();
         foreach ($allFolder as $row) {
-            $folders[$row['id']] = $row;
+            $folders[$row['id']] = [
+                'id'                => $row['id'],
+                'parentId'          => $row['parent_id'],
+                'slug'              => $row['slug'],
+                'name'              => $row['name'],
+                'location'          => $row['location'],
+                'remoteContainer'   => $row['remote_container'],
+                'createdAt'         => $row['created_at'],
+                'updatedAt'         => $row['updated_at'],
+            ];
         }
 
         foreach ($folders as $row) {
-            if (array_key_exists($row['parent'], $folders)) {
-                $folders[$row['parent']]['children'][] =& $folders[$row['id']];
+            if (array_key_exists($row['parentId'], $folders)) {
+                $folders[$row['parentId']]['children'][] =& $folders[$row['id']];
             }
-            if ($row['parent'] == 0) {
+            if ($row['parentId'] == 0) {
                 $folderArr[] =& $folders[$row['id']];
             }
         }

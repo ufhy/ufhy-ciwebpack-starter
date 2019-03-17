@@ -50,6 +50,12 @@
 				&:last-child {
 					padding-right: 24px;
 				}
+				&.icon-label {
+					> div {
+						display: flex;
+						align-items: center;
+					}
+				}
 			}
 			tr[active] {
 				background: #FFFDE7!important;
