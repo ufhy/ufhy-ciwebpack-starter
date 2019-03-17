@@ -1,7 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['the_file::file_item_created'] = 'Iitem created';
-$lang['the_file::file_item_updated'] = 'Iitem updated';
+$lang['the_file::file_item_created'] = 'Item created';
+$lang['the_file::folder_created'] = 'Folder created';
+$lang['the_file::file_item_updated'] = 'Item updated';
 $lang['the_file::file_item_deleted'] = 'Item deleted';
 $lang['the_file::file_folder_not_empty'] = 'folder not empty';
 $lang['the_file::file_mkdir_error'] = 'mkdir error';

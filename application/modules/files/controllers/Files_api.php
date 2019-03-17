@@ -67,4 +67,31 @@ class Files_api extends Api_Controller
             'folders' => The_file::folderTree()
         ]);
     }
+
+    public function new_folder()
+    {
+        userHasRoleOrDie('create_folder', 'files');
+
+        $this->load->library('form_validation');
+        $this->form_validation->CI =& $this;
+
+        $this->form_validation->set_rules('folderName', 'lang:files::folder_name', 'trim|required');
+        if ($this->form_validation->run())
+        {
+            $folderId = $this->input->post('folderId', TRUE);
+            $folderName = $this->input->post('folderName', TRUE);
+            $result = The_file::createFolder($folderId ? $folderId : 1, $folderName);
+
+            $result['status'] && Events::trigger('files::folder_created', $result['data']);
+
+            $this->template->build_json($result);
+        }
+        else {
+            $this->output->set_status_header('400', lang('files::msg:folder_name_required'));
+            $this->template->build_json([
+                'success' => false,
+                'message' => lang('files::msg:folder_name_required')
+            ]);
+        }
+    }
 }

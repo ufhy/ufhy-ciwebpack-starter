@@ -19,7 +19,7 @@ class Module_Files {
                 'create_folder','edit_folder','remove_folder'
             ),
             'events' => [
-                
+                'files::folder_created'
             ]
         );
     }

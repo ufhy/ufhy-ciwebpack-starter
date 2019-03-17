@@ -12,8 +12,9 @@
               :size="20"
             ></v-progress-circular>
           </v-card-title>
+
           <v-card-text class="py-0">
-            <v-treeview hoverable activatable transition return-object
+            <v-treeview hoverable activatable transition
               v-model="foldersTree"
               :open.sync="folderOpen"
               :items="foldersItems"
@@ -46,7 +47,7 @@
                 <v-icon>la-navicon</v-icon>
               </v-btn>
               <v-list dense>
-                <v-list-tile>
+                <v-list-tile @click="dialogNewFolder = true">
                   <v-list-tile-avatar size="">
                     <v-icon class="primary--text">la-folder-o</v-icon>
                   </v-list-tile-avatar>
@@ -64,7 +65,7 @@
                 </v-list-tile>
               </v-list>
             </v-menu>
-            <v-btn icon class="ma-0">
+            <v-btn icon class="ma-0" @click="fetchFolders">
               <v-icon>la-refresh</v-icon>
             </v-btn>
             <v-divider vertical class="mx-2"></v-divider>
@@ -89,6 +90,9 @@
                 :items="selectedItems"
                 :headers="tableView.headers">
                 <template slot="items" slot-scope="props">
+                  <td>
+                    <menut-item :item="props.item" btn-class="primary--text"></menut-item>
+                  </td>
                   <td class="icon-label">
                     <div>
                       <template v-if="props.item.type === 'folder'">
@@ -98,7 +102,7 @@
                         <v-icon v-if="props.item.fileType === 'd'" class="d-block primary--text" style="width: 30px">la-file-text</v-icon>
                         <v-icon v-if="props.item.fileType === 'i'" class="d-block primary--text" style="width: 30px">la-file-image-o</v-icon>
                       </template>
-                      <span>{{props.item.name}}</span>
+                      <span class="text-truncate">{{props.item.name}}</span>
                     </div>
                   </td>
                   <td class="text-truncate">
@@ -120,17 +124,22 @@
                     content-tag="v-layout"
                     class="mb-4">
                     <template slot="item" slot-scope="props">
-                      <v-flex xs12 md3>
-                        <v-hover>
-                          <v-card
-                            slot-scope="{ hover }"
-                            :class="`elevation-${hover ? 5 : 1}`">
-                            <v-card-title>
+                      <v-flex xs12 md4>
+                        <v-list dense>
+                          <v-list-tile class="elevation-2">
+                            <v-list-tile-avatar>
                               <v-icon class="mr-3 primary--text">la-folder</v-icon>
-                              {{ props.item.name }}
-                            </v-card-title>
-                          </v-card>
-                        </v-hover>
+                            </v-list-tile-avatar>
+                            <v-list-tile-content>
+                              <v-list-tile-title @click="openFolder(props.item)" style="cursor:pointer">
+                                {{ props.item.name }}
+                              </v-list-tile-title>
+                            </v-list-tile-content>
+                            <v-list-tile-action>
+                              <menut-item :item="props.item"></menut-item>
+                            </v-list-tile-action>
+                          </v-list-tile>
+                        </v-list>
                       </v-flex>
                     </template>
                   </v-data-iterator>
@@ -142,19 +151,29 @@
                     :items="selectedItemsFile"
                     content-tag="v-layout">
                     <template slot="item" slot-scope="props">
-                      <v-flex xs12 md2>
+                      <v-flex xs12 md3>
                         <v-hover>
                           <v-card
                             slot-scope="{ hover }"
                             :class="`elevation-${hover ? 12 : 2}`">
                             <div v-if="props.item.fileType === 'd'" class="card-thumb">
+                              <menut-item 
+                                :item="props.item"
+                                color="primary"
+                                class="card-thumb-action"
+                              ></menut-item>
                               <v-icon class="card-thumb-icon">la-file-text</v-icon>
                             </div>
                             <v-img v-if="props.item.fileType === 'i'"
                               :src="getImageUrl(props.item.id)"
                               aspect-ratio="2.75"
-                              height="100px"
-                            ></v-img>
+                              height="100px">
+                              <menut-item 
+                                :item="props.item"
+                                color="primary"
+                                class="card-thumb-action"
+                              ></menut-item>
+                            </v-img>
                             <v-card-text class="text-truncate">
                               {{ props.item.name }}
                             </v-card-text>
@@ -164,21 +183,34 @@
                     </template>
                   </v-data-iterator>
                 </template>
+
               </v-container>
             </template>
+
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
+
+    <dialog-input
+      v-if="dialogNewFolder"
+      v-model="dialogNewFolder"
+      :title="$t('files::new_folder')"
+      :placeholder="$t('files::new_folder_placeholder')"
+      :submit-text="$t('files::create_folder')"
+      @save="newFolderAction"
+    ></dialog-input>
   </v-container>
 </template>
 
 <script>
+import DialogInput from '../../components/DialogInput.vue';
+import MenutItem from './includes/MenuItem.vue';
 
 export default {
   name: 'files-page',
   components: {
-    
+    DialogInput, MenutItem
   },
   data() {
     return {
@@ -192,12 +224,14 @@ export default {
       indexFolder: {},
       tableView: {
         headers: [
+          {text: '', value: 'id', sortable: false, width: "20"},
           {text: this.$t('lb::name'), value: 'name', sortable: false},
           {text: this.$t('files::file_size'), value: 'size', sortable: false},
           {text: this.$t('files::updated_at'), value: 'updatedAt', sortable: false, width: "100px"},
         ]
       },
-      viewAs: 'card'
+      viewAs: 'table',
+      dialogNewFolder: false,
     }
   },
   computed: {
@@ -269,27 +303,29 @@ export default {
       },
     }
   },
-  async created() {
-    this.loadingFolder = true;
-    await this.fetchFolders();
-    this.loadingFolder = false;
+  created() {
+    this.fetchFolders();
   },
   methods: {
     fetchFolders() {
-      return this.$axios.get('files/folders')
+      this.loadingFolder = true;
+      this.$axios.get('files/folders')
         .then(response => {
           const { data } = response;
           this.foldersItems = data.folders;
           this.buildIndex(false, this.foldersItems);
           if (data.folders.length > 0) {
-            this.folderActive.push(data.folders[0]);
+            this.folderActive.push(data.folders[0].id);
           }
         })
         .catch(error => {
           console.log(error);
           const { statusText, status } = error;
           this.$ufsnackbars.error('Code: ' + status + ' ' + statusText);
-        });
+        })
+        .then(() => {
+          this.loadingFolder = false;
+        })
     },
     fetchFiles() {
       if (this.folderActive.length <= 0) {
@@ -297,7 +333,7 @@ export default {
       }
 
       this.loadingFile = true;
-      this.$axios.get('files', { params: {folder: this.folderActive[0].id} })
+      this.$axios.get('files', { params: {folder: this.folderActive[0]} })
         .then(response => {
           const { data } = response;
           if (data.success) {
@@ -326,6 +362,42 @@ export default {
     },
     getImageUrl(image) {
       return ufhy.SITE_URL + 'files/thumb/' + image
+    },
+    openFolder(item) {
+      console.log(item);
+      this.folderActive = []
+      this.folderActive.push(item.id);
+    },
+    newFolderAction(payload) {
+      if (this.loadingFile || this.loadingFolder) {
+        return false;
+      }
+      if (this.folderActive.length <= 0) {
+        return false;
+      }
+
+      this.loadingFile = true;
+      const item = new FormData();
+      item.set('folderId', this.folderActive[0]);
+      item.set('folderName', payload);
+
+      this.$axios.post('files/new_folder', item)
+        .then((response) => {
+          const { data } = response;
+          if (data.status) {
+            this.$ufsnackbars.success(data.message);
+            this.fetchFiles();
+          } else {
+            this.$ufsnackbars.error(data.message);
+          }
+        })
+        .catch((error) => {
+          const {statusText, data} = error;
+          this.$ufsnackbars.error(statusText);
+        })
+        .then(() => {
+          this.loadingFile = false;
+        }) 
     }
   }
 }
@@ -338,8 +410,14 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #f5f5f5;
+  position: relative;
 }
 .card-thumb-icon {
   font-size: 80px;
+}
+.card-thumb-action {
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }
 </style>

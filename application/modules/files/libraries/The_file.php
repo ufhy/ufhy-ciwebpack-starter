@@ -64,6 +64,7 @@ class The_file
 
     protected static function createSlug($name)
     {
+        ci()->load->helper('text');
         $name = convert_accented_characters($name);
         return strtolower(preg_replace('/-+/', '-', preg_replace('/[^a-zA-Z0-9]/', '-', $name)));
     }
@@ -76,7 +77,7 @@ class The_file
         );
     }
 
-    public static function createFolder($parent = 0, $name = 'Folder Baru')
+    public static function createFolder($parent = 1, $name = 'Untitled Folder')
     {
         $i = 0;
         $oriSlug = self::createSlug($name);
@@ -99,7 +100,7 @@ class The_file
         $insert['id'] = $id;
         $insert['file_count'] = 0;
 
-        return self::result(true, lang('the_file::file_item_created'), $insert['name'], $insert);
+        return self::result(true, lang('the_file::folder_created'), $insert['name'], $insert);
     }
 
     public static function renameFolder($id = 0, $name)
